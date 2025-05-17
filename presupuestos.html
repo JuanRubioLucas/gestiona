@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presupuestos</title>
+    <link rel="stylesheet" href="style.css"> <!-- Enlace al archivo CSS -->
+    <link rel="stylesheet" href="style_input.css"> <!-- Enlace al archivo CSS -->
+
+</head>
+<body>
+    <h1>Presupuestos</h1>  
+    <table id="presupuestos-table">
+        <thead>
+            <tr>
+                <th>Grupo</th>
+                <th>Concepto</th>
+                <th>Localización</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody id="presupuestos-body">
+            <!-- Los presupuestos se llenarán aquí -->
+        </tbody>
+    </table>
+
+    <!-- Botón flotante añadir presupuesto-->
+    <button id="add-budget-btn" class="floating-btn">+</button>
+
+    <!-- Botón flotante de configuración -->
+    <button id="settings-btn" class="floating-btn settings-btn">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </button>
+    
+    <!-- Modal para añadir presupuesto -->
+    <div id="add-budget-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Añadir Presupuesto</h2>
+            <form id="add-budget-form">
+                <label for="grupo">Grupo:</label>
+                <input type="text" id="grupo" name="grupo" required>
+                <label for="concepto">Concepto:</label>
+                <input type="text" id="concepto" name="concepto" required>
+                <label for="localizacion">Localización:</label>
+                <input type="text" id="localizacion" name="localizacion" required>
+                <label for="fecha">Fecha:</label>   
+                <input type="date" id="fecha" name="fecha" value="">
+                <button type="submit">Añadir</button>
+                <button type="button" id="close-modal-btn">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const token = localStorage.getItem('token'); // Obtener el token del localStorage
+
+        if (!token) {
+            alert('No estás autenticado');
+            window.location.href = '/index.html'; // Redirigir al login si no hay token
+        } else {
+            // Solicitar información del usuario al backend
+            fetch('/user-info', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('No autorizado');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Mostrar el botón de configuración si el usuario es administrador
+                if (data.role === 'administrador') {
+                    const settingsBtn = document.getElementById('settings-btn');
+                    settingsBtn.classList.remove('hidden');
+
+                    // Redirigir a la página de configuración al hacer clic en el botón
+                    settingsBtn.addEventListener('click', () => {
+                        window.location.href = '/configuracion.html'; // Página de configuración
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error al obtener la información del usuario:', error);
+            });
+        }
+
+        
+        // Obtener los presupuestos del servidor (en archivo externo consultapresu.js
+
+        // Mostrar el modal al hacer clic en el botón flotante
+        const addBudgetBtn = document.getElementById('add-budget-btn');
+        const addBudgetModal = document.getElementById('add-budget-modal');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const addBudgetForm = document.getElementById('add-budget-form');
+
+        addBudgetBtn.addEventListener('click', () => {
+            addBudgetModal.classList.remove('hidden');
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            addBudgetModal.classList.add('hidden');
+        });
+
+        // Enviar el formulario para añadir un nuevo presupuesto
+        addBudgetForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const grupo = document.getElementById('grupo').value;
+            const concepto = document.getElementById('concepto').value;
+            const localizacion = document.getElementById('localizacion').value;
+            const fecha = document.getElementById('fecha').value;
+
+            fetch('/presupuestos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ grupo, concepto, localizacion, fecha })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al añadir el presupuesto');
+                }
+                console.log("Presupuesto añadido, la respuesta es: ", response);
+                return response.json();
+            })
+            .then(newPresupuesto => {
+                // Añadir el nuevo presupuesto a la tabla
+                const tableBody = document.getElementById('presupuestos-body');
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${newPresupuesto.IdGrupo}</td>
+                    <td>${newPresupuesto.Concepto}</td>
+                    <td>${newPresupuesto.Localizacion}</td>
+                    <td>${new Date(newPresupuesto.Fecha).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit' }).replace(/\//g, '-')}</td>               
+                `
+               tableBody.appendChild(row);
+
+                // Cerrar el modal y limpiar el formulario
+                addBudgetModal.classList.add('hidden');
+                addBudgetForm.reset();
+            })
+            .catch(error => {
+                console.error('Error al añadir el presupuesto:', error);
+                alert('Error al añadir el presupuesto');
+            });
+        });
+
+
+
+         // Abrir el formulario al pulsar Shift + N
+        document.addEventListener('keydown', (event) => {
+            if (event.shiftKey && event.key === 'N') {
+                addBudgetModal.classList.remove('hidden');
+            }
+        });
+
+        
+
+    </script>
+    <script src="presupuestosdb.js"></script>    
+</body>
+</html>

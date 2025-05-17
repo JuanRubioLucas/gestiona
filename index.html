@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Gestiona management: login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css"> <!-- Enlace al archivo CSS -->
+
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Usuario" required>
+            <input type="password" name="password" placeholder="Contraseña" required>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+    </div>
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Evitar el envío por defecto del formulario
+    
+            const username = form.username.value;
+            const password = form.password.value;
+    
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('token', data.token); // Guardar el token en localStorage
+                    window.location.href = '/presupuestos.html'; // Redirigir a la página de presupuestos
+                } else {
+                    alert('Credenciales incorrectas');
+                }
+            } catch (error) {
+                console.error('Error al iniciar sesión:', error);
+            }
+        });
+    </script>
+</body>
+</html>
