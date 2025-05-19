@@ -3,15 +3,17 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-image: url('imagenes/photo_2023-11-15 02.23.29.jpg'); /* Ruta a la imagen */
+    background-size: cover; /* Escala la imagen para cubrir toda la pantalla */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /*Evita que la imagen se repita */
     color: #333;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-}
-
+  }
 /* Login Container */
 .login-container {
     background: #fff;
@@ -26,22 +28,26 @@ body {
     text-align: center;
 }
 
+.login-container input,
+.login-container button {
+    width: 100%; /* Asegura que todos tengan el mismo ancho */
+    padding: 10px; /* Espaciado interno consistente */
+    font-size: 16px; /* Tamaño de fuente consistente */
+    border: 1px solid #ccc; /* Borde consistente */
+    border-radius: 4px; /* Bordes redondeados */
+    box-sizing: border-box; /* Incluye el relleno y el borde en el tamaño total */
+}
+
 .login-container input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    margin: 10px 0; /* Espaciado vertical entre los cuadros */
 }
 
 .login-container button {
-    width: 100%;
-    padding: 10px;
     background-color: #007BFF;
     color: white;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .login-container button:hover {
@@ -155,4 +161,174 @@ tbody tr:hover {
 
 .hidden {
     display: none;
+}
+table {
+    width: 90%;
+    border-collapse: collapse;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+thead th {
+    padding: 15px;
+    text-align: left;
+    font-size: 16px;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #e9ecef;
+}
+
+tbody td {
+    padding: 15px;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background-color: #d6e9f9;
+}
+/* Botones dentro de las tablas */
+.table-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #60a2e8; /* Azul */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.table-btn:hover {
+    background-color: #60a2e8; /* Azul más oscuro */
+}
+
+/* Cambiar el cursor y el fondo al pasar sobre las filas */
+#presupuestos-table tbody tr:hover {
+    background-color: #f0f8ff; /* Azul claro */
+    cursor: pointer;
+}
+
+/* Botón flotante */
+.floating-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff; /* Azul */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Ocultar elementos */
+.hidden {
+    display: none;
+}
+/* Botón Editar */
+.edit-btn {
+    display: block;
+    margin: 20px auto; /* Centrar el botón debajo de la tabla */
+    padding: 10px 20px;
+    background-color: #007bff; /* Azul */
+    color: white;
+    border: none;
+    border-radius: 4px; /* Botón cuadrado con bordes ligeramente redondeados */
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    width: 150px; /* Ancho fijo */
+}
+
+.edit-btn:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el cursor */
+}
+.generate-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #882121; /* Verde */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    width: 200px;
+}
+
+.generate-btn:hover {
+    background-color: #671a1a; 
+}
+
+/* Estilo para el select */
+select {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    padding: 10px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de fuente más grande */
+    font-family: Arial, sans-serif; /* Fuente consistente */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 4px; /* Bordes redondeados */
+    background-color: #fff; /* Fondo blanco */
+    color: #333; /* Color del texto */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    appearance: none; /* Elimina el estilo por defecto del navegador */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el select */
+}
+
+/* Estilo para el select al pasar el cursor */
+select:hover {
+    border-color: #007bff; /* Cambia el borde a azul */
+}
+
+/* Estilo para el select al enfocarse */
+select:focus {
+    outline: none; /* Elimina el contorno por defecto */
+    border-color: #007bff; /* Borde azul */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra azul */
+}
+
+
+.delete-btn {
+    display: block;
+    margin: 20px auto; /* Centrar el botón debajo de la tabla */
+    padding: 10px 20px; /* Espaciado interno consistente */
+    background-color: #dc3545; /* Rojo */
+    color: white;
+    border: none;
+    border-radius: 4px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente consistente */
+    cursor: pointer;
+    text-align: center;
+    width: 200px; /* Ancho fijo consistente con los otros botones */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro */
 }

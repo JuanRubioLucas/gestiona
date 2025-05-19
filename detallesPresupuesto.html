@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Presupuesto</title>
+    <link rel="stylesheet" href="style.css"> <!-- Enlace al archivo CSS -->
+    <style>
+        /* Estilo para alinear los botones en una fila */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* Espaciado entre los botones */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Detalles del Presupuesto</h1>
+    <p>Estás viendo los detalles del presupuesto con ID: <span id="budget-id"></span></p>
+
+    <!-- Tabla para mostrar los detalles del presupuesto -->
+    <table id="budget-details-table">
+        <thead>
+            <tr>
+                <th>ID Presupuesto</th>
+                <th>ID Grupo</th>
+                <th>Concepto</th>
+                <th>Localización</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Estado</th>
+                <th>Precio</th>
+                <th>Precio IVA</th>
+                <th>Precio Final</th>
+                <th>ID Contacto</th>
+                <th>ID Usuario</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los detalles del presupuesto se llenarán aquí -->
+        </tbody>
+    </table>
+
+    <!-- Contenedor para los botones -->
+    <div class="button-container">
+        <button id="edit-budget-btn" class="edit-btn">Editar</button>
+        <button id="save-budget-btn" class="edit-btn hidden">Guardar</button>
+        <button id="generate-budget-btn" class="generate-btn">Generar Presupuesto</button>
+        <button id="generate-invoice-btn" class="generate-btn">Generar Factura</button>
+        <button id="delete-budget-btn" class="delete-btn">Eliminar Presupuesto</button>
+    </div>
+
+    <script>
+        // Obtener el ID del presupuesto desde la URL
+        const params = new URLSearchParams(window.location.search);
+        const budgetId = params.get('id');
+        document.getElementById('budget-id').textContent = budgetId;
+
+        // Obtener el token del almacenamiento local
+        const token = localStorage.getItem('token');
+
+        // Verifica si el token existe
+        if (!token) {
+            alert('No estás autenticado. Por favor, inicia sesión.');
+            window.location.href = '/index.html'; // Redirigir al login si no hay token
+        }
+
+        // Obtener los detalles del presupuesto desde el servidor
+        fetch(`/presupuestos/${budgetId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}` // Incluir el token en los encabezados
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error al obtener los detalles del presupuesto: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Datos recibidos del servidor:', data); // Verificar los datos en la consola
+
+                // Llenar la tabla con los detalles del presupuesto
+                const tableBody = document.getElementById('budget-details-table').querySelector('tbody');
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${data.IdPresupuesto}</td>
+                    <td contenteditable="false">${data.IdGrupo}</td>
+                    <td contenteditable="false">${data.Concepto}</td>
+                    <td contenteditable="false">${data.Localizacion}</td>
+                    <td contenteditable="false">${data.Fecha}</td>
+                    <td contenteditable="false">${data.Hora}</td>
+                    <td contenteditable="false">${data.Estado}</td>
+                    <td contenteditable="false">${data.Precio}</td>
+                    <td contenteditable="false">${data.Precio_iva}</td>
+                    <td contenteditable="false">${data.Precio_final}</td>
+                    <td contenteditable="false">${data.Idcontacto}</td>
+                    <td contenteditable="false">${data.IdUsuario}</td>
+                `;
+                tableBody.appendChild(row);
+            })
+            .catch(error => {
+                console.error('Error al obtener los detalles del presupuesto:', error);
+                alert('No se pudieron cargar los detalles del presupuesto.');
+            });
+
+        // Función para habilitar la edición
+        const editBudgetButton = document.getElementById('edit-budget-btn');
+        const saveBudgetButton = document.getElementById('save-budget-btn');
+
+        editBudgetButton.addEventListener('click', () => {
+            const editableCells = document.querySelectorAll('#budget-details-table td[contenteditable="false"]');
+            editableCells.forEach(cell => {
+                cell.setAttribute('contenteditable', 'true'); // Hacer las celdas editables
+                cell.style.backgroundColor = '#f9f9f9'; // Cambiar el fondo para indicar que es editable
+            });
+
+            // Mostrar el botón "Guardar" y ocultar el botón "Editar"
+            editBudgetButton.classList.add('hidden');
+            saveBudgetButton.classList.remove('hidden');
+        });
+
+        // Función para guardar los cambios
+        saveBudgetButton.addEventListener('click', () => {
+            const editableCells = document.querySelectorAll('#budget-details-table td[contenteditable="true"]');
+            const updatedData = {
+                IdGrupo: editableCells[1].textContent,
+                Concepto: editableCells[2].textContent,
+                Localizacion: editableCells[3].textContent,
+                Fecha: editableCells[4].textContent,
+                Hora: editableCells[5].textContent,
+                Estado: editableCells[6].textContent,
+                Precio: editableCells[7].textContent,
+                Precio_iva: editableCells[8].textContent,
+                Precio_final: editableCells[9].textContent,
+                Idcontacto: editableCells[10].textContent,
+                IdUsuario: editableCells[11].textContent
+            };
+
+            console.log('Datos actualizados:', updatedData);
+
+            // Enviar los datos actualizados al servidor
+            fetch(`/presupuestos/${budgetId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(updatedData)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Error al guardar los cambios: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Cambios guardados con éxito:', data);
+                    alert('Cambios guardados con éxito.');
+
+                    // Deshabilitar la edición de las celdas
+                    editableCells.forEach(cell => {
+                        cell.setAttribute('contenteditable', 'false');
+                        cell.style.backgroundColor = ''; // Restaurar el fondo original
+                    });
+
+                    // Mostrar el botón "Editar" y ocultar el botón "Guardar"
+                    saveBudgetButton.classList.add('hidden');
+                    editBudgetButton.classList.remove('hidden');
+                })
+                .catch(error => {
+                    console.error('Error al guardar los cambios:', error);
+                    alert('No se pudieron guardar los cambios.');
+                });
+        });
+
+        // Función para eliminar el presupuesto
+        const deleteBudgetButton = document.getElementById('delete-budget-btn');
+        deleteBudgetButton.addEventListener('click', () => {
+            const confirmDelete = confirm('¿Estás seguro de que deseas eliminar este presupuesto? Esta acción no se puede deshacer.');
+            if (confirmDelete) {
+                fetch(`/presupuestos/${budgetId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Error al eliminar el presupuesto: ${response.statusText}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Presupuesto eliminado con éxito:', data);
+                        alert('Presupuesto eliminado con éxito.');
+                        window.location.href = '/presupuestos.html'; // Redirigir a la lista de presupuestos
+                    })
+                    .catch(error => {
+                        console.error('Error al eliminar el presupuesto:', error);
+                        alert('No se pudo eliminar el presupuesto.');
+                    });
+            }
+        });
+
+        // Función para generar un presupuesto
+        const generateBudgetButton = document.getElementById('generate-budget-btn');
+        generateBudgetButton.addEventListener('click', () => {
+            alert('Funcionalidad de generar presupuesto aún no implementada.');
+            // Aquí puedes agregar la lógica para generar un presupuesto
+        });
+
+        // Función para generar una factura
+        const generateInvoiceButton = document.getElementById('generate-invoice-btn');
+        generateInvoiceButton.addEventListener('click', () => {
+            alert('Funcionalidad de generar factura aún no implementada.');
+            // Aquí puedes agregar la lógica para generar una factura
+        });
+    </script>
+</body>
+</html>

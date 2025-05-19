@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Usuario</title>
+    <link rel="stylesheet" href="style.css"> <!-- Enlace al archivo CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff; /* Azul */
+            margin-top: 20px;
+        }
+
+        #user-details-table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        #user-details-table th, #user-details-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        #user-details-table th {
+            background-color: #007bff; /* Azul */
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        #user-details-table td {
+            color: #333;
+        }
+
+        #user-details-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        #user-details-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .edit-btn, .save-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .save-btn {
+            background-color: #28a745;
+            color: white;
+            display: none; /* Ocultar inicialmente */
+        }
+
+        .save-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Detalles del Usuario</h1>
+
+    <!-- Tabla para mostrar los detalles del usuario -->
+    <table id="user-details-table">
+        <thead>
+            <tr>
+                <th>Campo</th>
+                <th>Datos del usuario</th>
+            </tr>
+        </thead>
+        <tbody id="user-details">
+            <!-- Los detalles del usuario se llenarán aquí -->
+        </tbody>
+    </table>
+
+    <!-- Botones para editar y guardar -->
+    <div class="button-container">
+        <button id="edit-btn" class="edit-btn">Editar</button>
+        <button id="save-btn" class="save-btn">Guardar</button>
+    </div>
+
+    <script>
+        // Obtener el token del almacenamiento local
+        const token = localStorage.getItem('token');
+
+        // Verifica si el token existe
+        if (!token) {
+            alert('No estás autenticado. Por favor, inicia sesión.');
+            window.location.href = '/index.html'; // Redirigir al login si no hay token
+        }
+
+        // Obtener el ID del usuario desde la URL
+        const params = new URLSearchParams(window.location.search);
+        const userId = params.get('id');
+        console.log('ID del usuario desde la URL:', userId); // Depuración
+
+        // Verifica si el ID del usuario es válido
+        if (!userId) {
+            alert('No se proporcionó un ID de usuario válido.');
+            window.location.href = '/usuarios.html'; // Redirigir a la lista de usuarios
+        }
+
+        // Obtener los detalles del usuario desde el servidor
+        fetch(`/usuarios/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}` // Incluir el token en los encabezados
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error al obtener los detalles del usuario: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(user => {
+                console.log('Detalles del usuario:', user); // Verificar los datos en la consola
+
+                // Llenar la tabla con los detalles del usuario
+                const detailsBody = document.getElementById('user-details');
+                detailsBody.innerHTML = `
+                    <tr><td>ID Usuario</td><td contenteditable="false">${user.IdUsuario}</td></tr>
+                    <tr><td>Nombre Usuario</td><td contenteditable="false">${user.NombreUsuario}</td></tr>
+                    <tr><td>Rol</td><td contenteditable="false">${user.Rol}</td></tr>
+                    <tr><td>Contraseña</td><td contenteditable="false">${user.Contraseña}</td></tr>
+                    <tr><td>DNI</td><td contenteditable="false">${user.DNI || ''}</td></tr>
+                    <tr><td>Instrumento Principal</td><td contenteditable="false">${user.InstrumentoPrincipal || ''}</td></tr>
+                    <tr><td>Instrumento Secundario</td><td contenteditable="false">${user.InstrumentoSecundario || ''}</td></tr>
+                    <tr><td>Número Artísticamente</td><td contenteditable="false">${user.NumeroArtistitamente || ''}</td></tr>
+                    <tr><td>Número Seguridad Social</td><td contenteditable="false">${user.NumeroSeguridadSocial || ''}</td></tr>
+                `;
+            })
+            .catch(error => {
+                console.error('Error al obtener los detalles del usuario:', error);
+                alert('No se pudieron cargar los detalles del usuario.');
+            });
+
+        // Habilitar edición
+        const editBtn = document.getElementById('edit-btn');
+        const saveBtn = document.getElementById('save-btn');
+
+        editBtn.addEventListener('click', () => {
+            const editableCells = document.querySelectorAll('#user-details-table td[contenteditable="false"]');
+            editableCells.forEach(cell => {
+                cell.setAttribute('contenteditable', 'true');
+                cell.style.backgroundColor = '#f9f9f9'; // Indicar que es editable
+            });
+            editBtn.style.display = 'none';
+            saveBtn.style.display = 'inline-block';
+        });
+
+        // Guardar cambios
+        saveBtn.addEventListener('click', () => {
+            const editableCells = document.querySelectorAll('#user-details-table td[contenteditable="true"]');
+            const updatedData = {
+                IdUsuario: editableCells[0].textContent,
+                NombreUsuario: editableCells[1].textContent,
+                Rol: editableCells[2].textContent,
+                Contraseña: editableCells[3].textContent,
+                DNI: editableCells[4].textContent,
+                InstrumentoPrincipal: editableCells[5].textContent,
+                InstrumentoSecundario: editableCells[6].textContent,
+                NumeroArtistitamente: editableCells[7].textContent,
+                NumeroSeguridadSocial: editableCells[8].textContent
+            };
+
+            console.log('Datos actualizados:', updatedData);
+
+            // Enviar los datos actualizados al servidor
+            fetch(`/usuarios/${userId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(updatedData)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Error al guardar los cambios: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Cambios guardados con éxito:', data);
+                    alert('Cambios guardados con éxito.');
+                    location.reload(); // Recargar la página
+                })
+                .catch(error => {
+                    console.error('Error al guardar los cambios:', error);
+                    alert('No se pudieron guardar los cambios.');
+                });
+        });
+    </script>
+</body>
+</html>

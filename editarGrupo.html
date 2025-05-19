@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Grupo</title>
+</head>
+<body>
+    <h1>Editar Grupo</h1>
+    <p>Estás editando el grupo con ID: <span id="group-id"></span></p>
+
+    <form id="edit-group-form">
+        <label for="group-name">Nombre del Grupo:</label>
+        <input type="text" id="group-name" name="group-name" required>
+        <br><br>
+        <button type="submit">Guardar Cambios</button>
+    </form>
+
+    <script>
+        // Obtener el ID del grupo desde la URL
+        const params = new URLSearchParams(window.location.search);
+        const groupId = params.get('id');
+        document.getElementById('group-id').textContent = groupId;
+
+        // Cargar los datos del grupo (simulación)
+        document.getElementById('group-name').value = `Grupo ${groupId}`;
+
+        // Manejar el envío del formulario
+        document.getElementById('edit-group-form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const groupName = document.getElementById('group-name').value;
+
+            // Simular guardar los cambios (puedes reemplazar esto con una solicitud al servidor)
+            alert(`Cambios guardados para el grupo ${groupId}: ${groupName}`);
+        });
+    </script>
+</body>
+</html>

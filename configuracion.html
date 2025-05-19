@@ -4,9 +4,234 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configuración</title>
+    <link rel="stylesheet" href="style.css"> <!-- Reutilizamos el CSS existente -->
 </head>
 <body>
-    <h1>Página de Configuración</h1>
-    <p>Aquí podrás gestionar las configuraciones del sistema.</p>
+    <h1>Configuración</h1>
+
+    <!-- Tabla de Grupos -->
+    <h2>Grupos</h2>
+    <table id="grupos-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los grupos se llenarán aquí -->
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <button id="add-group-btn" class="table-btn">+</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </tbody>
+    </table>
+
+    <!-- Tabla de Usuarios -->
+    <h2>Usuarios</h2>
+    <table id="usuarios-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre de Usuario</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los usuarios se llenarán aquí -->
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                        <button id="add-user-btn" class="table-btn">+</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </tbody>
+    </table>
+
+
+    <script>
+        const token = localStorage.getItem('token'); // Obtener el token del localStorage
+
+        if (!token) {
+            alert('No estás autenticado');
+            window.location.href = '/index.html'; // Redirigir al login si no hay token
+        }
+
+        // Obtener los grupos del servidor
+        fetch('/grupos', {
+    method: 'GET',
+    headers: { 'Authorization': `Bearer ${token}` }
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Error al obtener los grupos');
+    }
+    return response.json();
+})
+.then(data => {
+    const gruposTableBody = document.getElementById('grupos-table').querySelector('tbody');
+    data.forEach(grupo => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${grupo.IdGrupo}</td>
+            <td>${grupo.Nombre}</td>
+            <td>
+                <button class="edit-group-btn" data-id="${grupo.IdGrupo}">
+                    Editar
+                </button>
+            </td>
+        `;
+        gruposTableBody.appendChild(row);
+
+        // Funcionalidad del botón Editar
+        const editBtn = row.querySelector('.edit-group-btn');
+        editBtn.addEventListener('click', () => {
+            const groupId = editBtn.getAttribute('data-id');
+            // Redirigir a la página de edición con el ID del grupo
+            window.location.href = `/editarGrupo.html?id=${groupId}`;
+        });
+    });
+})
+.catch(error => {
+    console.error('Error al obtener los grupos:', error);
+});
+        // Botón para añadir un nuevo grupo
+const addGroupBtn = document.getElementById('add-group-btn');
+addGroupBtn.addEventListener('click', () => {
+    const gruposTableBody = document.getElementById('grupos-table').querySelector('tbody');
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td contenteditable="true">Nuevo ID</td>
+        <td contenteditable="true">Nuevo Grupo</td>
+        <td>
+            <button class="save-group-btn">Guardar</button>
+        </td>
+    `;
+    gruposTableBody.appendChild(row);
+
+    // Añadir funcionalidad al botón de guardar
+    row.querySelector('.save-group-btn').addEventListener('click', () => {
+        const idGrupo = row.cells[0].innerText;
+        const nombreGrupo = row.cells[1].innerText;
+
+        // Enviar el nuevo grupo al servidor
+        fetch('/grupos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ idGrupo, nombreGrupo })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al guardar el grupo');
+            }
+            alert('Grupo guardado con éxito');
+        })
+        .catch(error => {
+            console.error('Error al guardar el grupo:', error);
+        });
+
+    });
+});
+
+        // Obtener los usuarios del servidor
+        fetch('/usuarios', {
+    method: 'GET',
+    headers: { 'Authorization': `Bearer ${token}` }
+})
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Error al obtener los usuarios');
+    }
+    return response.json();
+})
+.then(data => {
+    const usuariosTableBody = document.getElementById('usuarios-table').querySelector('tbody');
+    data.forEach(usuario => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${usuario.IdUsuario}</td>
+            <td>${usuario.NombreUsuario}</td>
+            <td>${usuario.Rol}</td>
+            <td>
+                <button class="view-user-btn" data-id="${usuario.IdUsuario}">
+                    Visualizar
+                </button>
+            </td>
+        `;
+        usuariosTableBody.appendChild(row);
+
+        // Funcionalidad del botón Visualizar
+        const viewBtn = row.querySelector('.view-user-btn');
+        viewBtn.addEventListener('click', () => {
+            const userId = viewBtn.getAttribute('data-id');
+            // Redirigir a la página de visualización con el ID del usuario
+            window.location.href = `/visualizar.html?id=${userId}`;
+        });
+    });
+})
+.catch(error => {
+    console.error('Error al obtener los usuarios:', error);
+});
+        const addUserBtn = document.getElementById('add-user-btn');
+addUserBtn.addEventListener('click', () => {
+    const usuariosTableBody = document.getElementById('usuarios-table').querySelector('tbody');
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td contenteditable="true">Nuevo ID</td>
+        <td contenteditable="true">Nuevo Usuario</td>
+        <td contenteditable="true">Nuevo Rol</td>
+        <td>
+            <button class="save-user-btn">Guardar</button>
+        </td>
+    `;
+    usuariosTableBody.appendChild(row);
+
+    // Funcionalidad del botón Guardar
+    row.querySelector('.save-user-btn').addEventListener('click', () => {
+        const idUsuario = row.cells[0].innerText.trim();
+        const nombreUsuario = row.cells[1].innerText.trim();
+        const rol = row.cells[2].innerText.trim();
+
+        // Validar los datos antes de enviarlos
+        if (!idUsuario || !nombreUsuario || !rol) {
+            alert('Todos los campos son obligatorios');
+            return;
+        }
+
+        // Enviar el nuevo usuario al servidor
+        fetch('/usuarios', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ idUsuario, nombreUsuario, rol })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al guardar el usuario');
+            }
+            alert('Usuario guardado con éxito');
+            row.cells[0].contentEditable = false;
+            row.cells[1].contentEditable = false;
+            row.cells[2].contentEditable = false;
+            row.querySelector('.save-user-btn').remove(); // Eliminar el botón Guardar después de guardar
+        })
+        .catch(error => {
+            console.error('Error al guardar el usuario:', error);
+        });
+    });
+});
+
+    </script>
 </body>
 </html>

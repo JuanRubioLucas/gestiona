@@ -115,7 +115,21 @@ app.get('/user-info', authenticateToken, (req, res) => {
     });
 });
 
-//INSECIÓN DE DATOS
+// Ruta para protegida para obtener la ifnormación de los grupos
+app.get('/grupos', authenticateToken, (req, res) => {
+    const query = 'SELECT IdGrupo, Nombre FROM Grupos';
+
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error al obtener los grupos:', err);
+            return res.status(500).send('Error interno del servidor');
+        }
+
+        res.json(results); // Enviar los grupos como JSON
+    });
+});
+
+//INSERCIÓN DE DATOS
 // Ruta para manejar la creación de un nuevo presupuesto
 app.post('/presupuestos', authenticateToken, (req, res) => {
     const userId = req.user.id; // ID del usuario autenticado (extraído del token)
@@ -154,10 +168,214 @@ app.post('/presupuestos', authenticateToken, (req, res) => {
     });
 });
 
+// Ruta para obtener los Grupos
+app.get('/grupos', authenticateToken, (req, res) => {
+    const query = 'SELECT * FROM Grupos';
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error al obtener los grupos:', err);
+            return res.status(500).send('Error interno del servidor');
+        }
+        res.json(results);
+    });
+});
 
+app.post('/grupos', authenticateToken, (req, res) => {
+    const { idGrupo, nombreGrupo } = req.body;
 
+    const query = 'INSERT INTO Grupos (IdGrupo, Nombre) VALUES (?, ?)';
+    db.query(query, [idGrupo, nombreGrupo], (err, result) => {
+        if (err) {
+            console.error('Error al guardar el grupo:', err);
+            return res.status(500).send('Error interno del servidor');
+        }
+        res.status(201).send('Grupo guardado con éxito');
+    });
+});
+
+// Ruta para obtener los usuarios
+app.get('/usuarios', authenticateToken, (req, res) => {
+    const query = 'SELECT IdUsuario, NombreUsuario, Rol FROM Usuarios';
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error al obtener los usuarios:', err);
+            return res.status(500).send('Error interno del servidor');
+        }
+        res.json(results);
+    });
+});
+
+app.post('/usuarios', authenticateToken, (req, res) => {
+    const { idUsuario, nombreUsuario, rol } = req.body;
+
+    // Validar que todos los campos estén presentes
+    if (!idUsuario || !nombreUsuario || !rol) {
+        return res.status(400).send('Todos los campos son obligatorios');
+    }
+
+    const query = 'INSERT INTO Usuarios (IdUsuario, NombreUsuario, Rol) VALUES (?, ?, ?)';
+    db.query(query, [idUsuario, nombreUsuario, rol], (err, result) => {
+        if (err) {
+            console.error('Error al guardar el usuario:', err);
+            return res.status(500).send('Error interno del servidor');
+        }
+        res.status(201).send('Usuario guardado con éxito');
+    });
+});
 
 // Iniciar el servidor
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
+});
+
+app.get('/presupuestos/:id', authenticateToken, (req, res) => {
+    const presupuestoId = req.params.id;
+    const query = `
+        SELECT IdPresupuesto, IdGrupo, Concepto, Localizacion, Fecha, Hora, Estado, 
+               Precio, Precio_iva, Precio_final, Idcontacto, IdUsuario
+        FROM presupuestos
+        WHERE IdPresupuesto = ?
+    `;
+
+    db.query(query, [presupuestoId], (err, results) => {
+        if (err) {
+            console.error('Error al obtener los detalles del presupuesto:', err);
+            return res.status(500).send('Error interno del servidor');
+        }
+
+        if (results.length === 0) {
+            return res.status(404).send('Presupuesto no encontrado');
+        }
+
+        res.json(results[0]); // Enviar el primer resultado como JSON
+    });
+});
+
+app.put('/presupuestos/:id', authenticateToken, (req, res) => {
+    const presupuestoId = req.params.id;
+    const {
+        IdGrupo,
+        Concepto,
+        Localizacion,
+        Fecha,
+        Hora,
+        Estado,
+        Precio,
+        Precio_iva,
+        Precio_final,
+        Idcontacto,
+        IdUsuario
+    } = req.body;
+
+    const query = `
+        UPDATE presupuestos
+        SET IdGrupo = ?, Concepto = ?, Localizacion = ?, Fecha = ?, Hora = ?, Estado = ?, 
+            Precio = ?, Precio_iva = ?, Precio_final = ?, Idcontacto = ?, IdUsuario = ?
+        WHERE IdPresupuesto = ?
+    `;
+
+    db.query(query, [IdGrupo, Concepto, Localizacion, Fecha, Hora, Estado, Precio, Precio_iva, Precio_final, Idcontacto, IdUsuario, presupuestoId], (err, result) => {
+        if (err) {
+            console.error('Error al actualizar el presupuesto:', err);
+            return res.status(500).send('Error interno del servidor');
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).send('Presupuesto no encontrado');
+        }
+
+        res.json({ message: 'Presupuesto actualizado con éxito' });
+    });
+});
+
+app.get('/usuarios/:id', authenticateToken, (req, res) => {
+    const userId = req.params.id;
+    console.log('ID del usuario recibido:', userId); // Verificar el ID recibido
+
+    const query = `
+        SELECT IdUsuario, NombreUsuario, Rol, Contraseña, DNI, InstrumentoPrincipal, 
+               InstrumentoSecundario, NumeroArtistitamente, NumeroSeguridadSocial
+        FROM Usuarios
+        WHERE IdUsuario = ?
+    `;
+
+    db.query(query, [userId], (err, results) => {
+        if (err) {
+            console.error('Error al obtener los detalles del usuario:', err);
+            return res.status(500).send('Error interno del servidor');
+        }
+
+        if (results.length === 0) {
+            console.log('Usuario no encontrado'); // Depuración
+            return res.status(404).send('Usuario no encontrado');
+        }
+
+        console.log('Detalles del usuario encontrados:', results[0]); // Depuración
+        res.json(results[0]); // Enviar el primer resultado como JSON
+    });
+});
+
+app.put('/usuarios/:id', authenticateToken, (req, res) => {
+    const userId = req.params.id;
+    const {
+        NombreUsuario,
+        Rol,
+        Contraseña,
+        DNI,
+        InstrumentoPrincipal,
+        InstrumentoSecundario,
+        NumeroArtistitamente,
+        NumeroSeguridadSocial
+    } = req.body;
+
+    const query = `
+        UPDATE Usuarios
+        SET NombreUsuario = ?, Rol = ?, Contraseña = ?, DNI = ?, 
+            InstrumentoPrincipal = ?, InstrumentoSecundario = ?, 
+            NumeroArtistitamente = ?, NumeroSeguridadSocial = ?
+        WHERE IdUsuario = ?
+    `;
+
+    const values = [
+        NombreUsuario,
+        Rol,
+        Contraseña,
+        DNI,
+        InstrumentoPrincipal,
+        InstrumentoSecundario,
+        NumeroArtistitamente,
+        NumeroSeguridadSocial,
+        userId
+    ];
+
+    db.query(query, values, (err, result) => {
+        if (err) {
+            console.error('Error al actualizar el usuario:', err);
+            return res.status(500).json({ error: 'Error interno del servidor' });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+
+        res.status(200).json({ message: 'Usuario actualizado con éxito' }); // Respuesta en formato JSON
+    });
+});
+
+app.delete('/presupuestos/:id', authenticateToken, (req, res) => {
+    const budgetId = req.params.id;
+
+    const query = 'DELETE FROM Presupuestos WHERE IdPresupuesto = ?';
+    db.query(query, [budgetId], (err, result) => {
+        if (err) {
+            console.error('Error al eliminar el presupuesto:', err);
+            return res.status(500).json({ error: 'Error interno del servidor' });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: 'Presupuesto no encontrado' });
+        }
+
+        res.status(200).json({ message: 'Presupuesto eliminado con éxito' });
+    });
 });
