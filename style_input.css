@@ -23,6 +23,9 @@
 
 /* Modal */
 .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     top: 0;
     left: 0;
@@ -30,59 +33,108 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s;
 }
 
-.modal.hidden {
-    display: none;
+.modal.show {
+    visibility: visible;
+    opacity: 1;
 }
+
 
 .modal-content {
-    background: white;
+    background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    width: 300px;
+    width: 80%;
+    max-width: 600px;
+    max-height: 90vh; /* Limita la altura máxima al 90% de la pantalla */
+    overflow-y: auto; /* Habilita el desplazamiento vertical si el contenido excede la altura */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
+
 .modal-content h2 {
-    margin-top: 0;
+    margin-bottom: 20px;
     text-align: center;
 }
 
-.modal-content form {
-    display: flex;
-    flex-direction: column;
+.modal-content form label {
+    display: block;
+    margin: 10px 0 5px;
 }
 
-.modal-content label {
-    margin-top: 10px;
-}
-
-.modal-content input {
+.modal-content form input,
+.modal-content form select {
+    width: 100%;
     padding: 10px;
-    margin-top: 5px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box; /* Asegura que el padding no aumente el ancho total */
+
 }
 
-.modal-content button {
-    margin-top: 15px;
+.form-row {
+    display: flex;
+    gap: 20px; /* Espaciado entre los elementos */
+    margin-bottom: 15px; /* Espaciado inferior entre filas */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column; /* Apila la etiqueta y el campo verticalmente */
+    flex: 1; /* Hace que los grupos ocupen el mismo espacio */
+}
+
+.form-group label {
+    margin-bottom: 5px; /* Espaciado entre la etiqueta y el campo */
+    font-weight: bold; /* Opcional: hace que las etiquetas sean más visibles */
+}
+
+.form-group input {
     padding: 10px;
-    background-color: #007BFF;
-    color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Asegura que el padding no aumente el ancho total */
+    width: 100%; /* Asegura que el campo ocupe todo el ancho del grupo */
+}
+
+
+/*AÑADIMOS ESTO PARA QUE EL DESPLEGABLE DE GRUPO NO SE VEA CHANO*/
+#grupo {
+    font-size: 16px; /* Tamaño de fuente normal */
+    padding: 10px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 4px; /* Bordes redondeados */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+}
+
+/* Estilo para las opciones del desplegable */
+#grupo option {
+    font-size: 16px; /* Tamaño de fuente normal */
+    padding: 5px; /* Espaciado interno para las opciones */
+}
+
+/*ESTILO DE LOS BOTONES DEL MODAL*/
+.modal-content form button {
+    padding: 10px 20px;
+    margin-right: 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
-.modal-content button:hover {
-    background-color: #0056b3;
+#modal-action-btn {
+    background-color: #007bff;
+    color: white;
 }
 
-.modal-content button[type="button"] {
-    background-color: #ccc;
-}
-
-.modal-content button[type="button"]:hover {
-    background-color: #aaa;
+#close-modal-btn {
+    background-color: #dc3545;
+    color: white;
 }

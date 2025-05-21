@@ -9,6 +9,7 @@
 
 </head>
 <body>
+    <!-- tabla principal de presupuestos-->
     <h1>Presupuestos</h1>  
     <table id="presupuestos-table">
         <thead>
@@ -30,30 +31,63 @@
     <!-- Botón flotante de configuración -->
     <button id="settings-btn" class="floating-btn hidden">⋮</button>
     
-    <!-- Modal para añadir presupuesto -->
-    <div id="add-budget-modal" class="modal hidden">
+   <!-- Modal reutilizable para añadir, consultar o editar presupuesto -->
+    <div id="budget-modal" class="modal hidden">
         <div class="modal-content">
-            <h2>Añadir Presupuesto</h2>
-            <form id="add-budget-form">
+            <h2 id="modal-title">Añadir Presupuesto</h2> <!-- Título dinámico -->
+            <form id="budget-form">
+                <!--elemento oculto para almacenar el id de presupuesto-->
+                <input type="hidden" id="idpresupuesto" name="id-presupuesto">
                 <label for="grupo">Grupo:</label>
                 <select id="grupo" name="grupo" required>
                     <option value="" disabled selected>Selecciona un grupo</option>
+                    <!-- Los grupos se llenarán dinámicamente -->
                 </select>
                 <label for="concepto">Concepto:</label>
-                <input type="text" id="concepto" name="concepto" required>
+                <input type="text" id="concepto" name="concepto">
                 <label for="localizacion">Localización:</label>
-                <input type="text" id="localizacion" name="localizacion" required>
-                <label for="fecha">Fecha:</label>   
-                <input type="date" id="fecha" name="fecha" value="">
-                <button type="submit">Añadir</button>
+                <input type="text" id="localizacion" name="localizacion">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fecha">Fecha:</label>
+                        <input type="date" id="fecha" name="fecha">
+                    </div>
+                    <div class="form-group">
+                        <label for="hora">Hora:</label>
+                        <input type="time" id="hora" name="hora">
+                    </div>
+                </div>
+                <label for="estado">Estado:</label>
+                <input type="text" id="estado" name="estado">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="precio">Precio: (€)</label>
+                        <input type="number" id="precio" name="precio" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="precio-iva">IVA: (%)</label>
+                        <input type="number" id="precio-iva" name="precio-iva" step="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="precio-final">Precio Final: (€)</label>
+                        <input type="number" id="precio-final" name="precio-final" step="0.01" >
+                    </div>
+                </div>
+                <label for="idcontacto">ID Contacto:</label>
+                <input type="text" id="idcontacto" name="idcontacto">
+                <label for="idusuario">ID Usuario:</label>
+                <input type="text" id="idusuario" name="idusuario" readonly>
+                <button type="submit" id="modal-action-btn">Añadir</button> <!-- Botón dinámico -->
                 <button type="button" id="close-modal-btn">Cancelar</button>
+                <button type="button" id="delete-budget-btn">Eliminar</button> <!-- Botón de eliminar -->
             </form>
         </div>
     </div>
 
     <script>
-        const token = localStorage.getItem('token'); // Obtener el token del localStorage
-
+        //Cosas de login
+        // Obtener el token del almacenamiento local
+        const token = localStorage.getItem('token'); 
         if (!token) {
             alert('No estás autenticado');
             window.location.href = '/index.html'; // Redirigir al login si no hay token
@@ -87,6 +121,7 @@
                 console.error('Error al obtener la información del usuario:', error);
             });
         }
+
 
         
         // Obtener los presupuestos del servidor (en archivo externo consultapresu.js

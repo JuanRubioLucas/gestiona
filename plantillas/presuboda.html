@@ -1,0 +1,2729 @@
+<html>
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <style type="text/css">
+        /* page break para la librería de html2pdf.js */
+        .page-break {
+            page-break-before: always;
+        }
+
+        /*@import url(https://themes.googleusercontent.com/fonts/css?kit=fpjTOVmNbO4Lz34iLyptLT-zkBQzhT3wpeVeA9miF2xdmMyzD_kEqOQ61LWSXwwvlt301QzubKtBDPfTI9oZDg);*/
+        /* latin */
+        @font-face {
+            font-family: 'Calibri';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/l/font?kit=J7afnpV-BGlaFfdAhLEY67FIEjg&skey=a1029226f80653a8&v=v15) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        /* latin */
+        @font-face {
+            font-family: 'Calibri';
+            font-style: normal;
+            font-weight: 700;
+            src: url(https://fonts.gstatic.com/l/font?kit=J7aanpV-BGlaFfdAjAo9_pxqHxIZrCE&skey=cd2dd6afe6bf0eb2&v=v15) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        /* cyrillic-ext */
+        @font-face {
+            font-family: 'Lobster';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/lobster/v30/neILzCirqoswsqX9zo-mM4MwWJXNqA.woff2) format('woff2');
+            unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+        }
+
+        /* cyrillic */
+        @font-face {
+            font-family: 'Lobster';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/lobster/v30/neILzCirqoswsqX9zoamM4MwWJXNqA.woff2) format('woff2');
+            unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+        }
+
+        /* vietnamese */
+        @font-face {
+            font-family: 'Lobster';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/lobster/v30/neILzCirqoswsqX9zo2mM4MwWJXNqA.woff2) format('woff2');
+            unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+        }
+
+        /* latin-ext */
+        @font-face {
+            font-family: 'Lobster';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/lobster/v30/neILzCirqoswsqX9zoymM4MwWJXNqA.woff2) format('woff2');
+            unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+
+        /* latin */
+        @font-face {
+            font-family: 'Lobster';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/lobster/v30/neILzCirqoswsqX9zoKmM4MwWJU.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        /* cyrillic-ext */
+        @font-face {
+            font-family: 'Ubuntu';
+            font-style: normal;
+            font-weight: 300;
+            src: url(https://fonts.gstatic.com/s/ubuntu/v20/4iCv6KVjbNBYlgoC1CzjvWyNPYZvg7UI.woff2) format('woff2');
+            unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+        }
+
+        /* cyrillic */
+        @font-face {
+            font-family: 'Ubuntu';
+            font-style: normal;
+            font-weight: 300;
+            src: url(https://fonts.gstatic.com/s/ubuntu/v20/4iCv6KVjbNBYlgoC1CzjtGyNPYZvg7UI.woff2) format('woff2');
+            unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+        }
+
+        /* greek-ext */
+        @font-face {
+            font-family: 'Ubuntu';
+            font-style: normal;
+            font-weight: 300;
+            src: url(https://fonts.gstatic.com/s/ubuntu/v20/4iCv6KVjbNBYlgoC1CzjvGyNPYZvg7UI.woff2) format('woff2');
+            unicode-range: U+1F00-1FFF;
+        }
+
+        /* greek */
+        @font-face {
+            font-family: 'Ubuntu';
+            font-style: normal;
+            font-weight: 300;
+            src: url(https://fonts.gstatic.com/s/ubuntu/v20/4iCv6KVjbNBYlgoC1Czjs2yNPYZvg7UI.woff2) format('woff2');
+            unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+        }
+
+        /* latin-ext */
+        @font-face {
+            font-family: 'Ubuntu';
+            font-style: normal;
+            font-weight: 300;
+            src: url(https://fonts.gstatic.com/s/ubuntu/v20/4iCv6KVjbNBYlgoC1CzjvmyNPYZvg7UI.woff2) format('woff2');
+            unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+
+        /* latin */
+        @font-face {
+            font-family: 'Ubuntu';
+            font-style: normal;
+            font-weight: 300;
+            src: url(https://fonts.gstatic.com/s/ubuntu/v20/4iCv6KVjbNBYlgoC1CzjsGyNPYZvgw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        ul.lst-kix_j070oqrfle7-7 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_j070oqrfle7-6 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_j070oqrfle7-5 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_j070oqrfle7-4 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_j070oqrfle7-3 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_j070oqrfle7-2 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_j070oqrfle7-1 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_j070oqrfle7-0 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_j070oqrfle7-8 {
+            list-style-type: none
+        }
+
+        .lst-kix_m8u2i1o0jnu0-0>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_m8u2i1o0jnu0-1>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_m8u2i1o0jnu0-2>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_m8u2i1o0jnu0-3>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_m8u2i1o0jnu0-5>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_m8u2i1o0jnu0-4>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_o0jw58wam5qi-4 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_o0jw58wam5qi-5 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_o0jw58wam5qi-2 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_o0jw58wam5qi-3 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_o0jw58wam5qi-0 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_o0jw58wam5qi-1 {
+            list-style-type: none
+        }
+
+        .lst-kix_xovm0wjr89q5-6>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_xovm0wjr89q5-7>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_xovm0wjr89q5-8>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_xovm0wjr89q5-1>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_xovm0wjr89q5-2>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_xovm0wjr89q5-5>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_xovm0wjr89q5-3>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_xovm0wjr89q5-4>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_s6focx5bmbrv-7 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_s6focx5bmbrv-6 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_s6focx5bmbrv-8 {
+            list-style-type: none
+        }
+
+        .lst-kix_m8u2i1o0jnu0-7>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_6vmr9tt7b0xy-7 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_s6focx5bmbrv-3 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_6vmr9tt7b0xy-8 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_s6focx5bmbrv-2 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_s6focx5bmbrv-5 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_s6focx5bmbrv-4 {
+            list-style-type: none
+        }
+
+        .lst-kix_m8u2i1o0jnu0-6>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_6vmr9tt7b0xy-3 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_6vmr9tt7b0xy-4 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_6vmr9tt7b0xy-5 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_s6focx5bmbrv-1 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_6vmr9tt7b0xy-6 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_s6focx5bmbrv-0 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_6vmr9tt7b0xy-0 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_6vmr9tt7b0xy-1 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_6vmr9tt7b0xy-2 {
+            list-style-type: none
+        }
+
+        .lst-kix_m8u2i1o0jnu0-8>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_br35krqu1to0-8 {
+            list-style-type: none
+        }
+
+        .lst-kix_9y2lorhzuqk8-1>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_br35krqu1to0-2 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_br35krqu1to0-3 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_br35krqu1to0-0 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_br35krqu1to0-1 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_br35krqu1to0-6 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_br35krqu1to0-7 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_br35krqu1to0-4 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_br35krqu1to0-5 {
+            list-style-type: none
+        }
+
+        .lst-kix_9y2lorhzuqk8-7>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_9y2lorhzuqk8-5>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_9y2lorhzuqk8-3>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_pihx10uon2lv-0 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_o0jw58wam5qi-8 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_o0jw58wam5qi-6 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_o0jw58wam5qi-7 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_qzihy3ky6bw2-0 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_qzihy3ky6bw2-1 {
+            list-style-type: none
+        }
+
+        .lst-kix_7df9o3emr75j-8>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_pihx10uon2lv-7 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_qzihy3ky6bw2-8 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_pihx10uon2lv-8 {
+            list-style-type: none
+        }
+
+        .lst-kix_lb67mj6fb0xp-7>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_7df9o3emr75j-6>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_pihx10uon2lv-5 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_qzihy3ky6bw2-6 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_pihx10uon2lv-6 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_qzihy3ky6bw2-7 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_pihx10uon2lv-3 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_qzihy3ky6bw2-4 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_pihx10uon2lv-4 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_qzihy3ky6bw2-5 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_pihx10uon2lv-1 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_qzihy3ky6bw2-2 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_pihx10uon2lv-2 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_qzihy3ky6bw2-3 {
+            list-style-type: none
+        }
+
+        .lst-kix_7df9o3emr75j-2>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_7df9o3emr75j-0>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_7df9o3emr75j-4>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_su6ki95zxf8m-3>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_ia4hz397rpem-8 {
+            list-style-type: none
+        }
+
+        .lst-kix_su6ki95zxf8m-4>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_su6ki95zxf8m-7>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_ia4hz397rpem-1 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_ia4hz397rpem-0 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_ia4hz397rpem-3 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_ia4hz397rpem-2 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_ia4hz397rpem-5 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_ia4hz397rpem-4 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_ia4hz397rpem-7 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_ia4hz397rpem-6 {
+            list-style-type: none
+        }
+
+        .lst-kix_v09wxoh0k2i7-4>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_su6ki95zxf8m-8>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_v09wxoh0k2i7-1>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_v09wxoh0k2i7-0>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_m8u2i1o0jnu0-0 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_m8u2i1o0jnu0-1 {
+            list-style-type: none
+        }
+
+        .lst-kix_lb67mj6fb0xp-3>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_m8u2i1o0jnu0-2 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_m8u2i1o0jnu0-3 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_m8u2i1o0jnu0-4 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_m8u2i1o0jnu0-5 {
+            list-style-type: none
+        }
+
+        .lst-kix_lb67mj6fb0xp-2>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_m8u2i1o0jnu0-6 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_m8u2i1o0jnu0-7 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_m8u2i1o0jnu0-8 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_knvokd6mgpbs-7 {
+            list-style-type: none
+        }
+
+        .lst-kix_o2n8mhsz351k-4>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_knvokd6mgpbs-8 {
+            list-style-type: none
+        }
+
+        .lst-kix_o0jw58wam5qi-3>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_o0jw58wam5qi-2>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_knvokd6mgpbs-3 {
+            list-style-type: none
+        }
+
+        .lst-kix_o2n8mhsz351k-3>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_knvokd6mgpbs-4 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_knvokd6mgpbs-5 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_knvokd6mgpbs-6 {
+            list-style-type: none
+        }
+
+        .lst-kix_o2n8mhsz351k-0>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_knvokd6mgpbs-0 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_knvokd6mgpbs-1 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_knvokd6mgpbs-2 {
+            list-style-type: none
+        }
+
+        .lst-kix_v09wxoh0k2i7-5>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_v09wxoh0k2i7-8>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_pihx10uon2lv-3>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_pihx10uon2lv-2>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_o0jw58wam5qi-6>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_o2n8mhsz351k-7>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_pihx10uon2lv-7>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_o2n8mhsz351k-8>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_o0jw58wam5qi-7>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_pihx10uon2lv-6>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_knvokd6mgpbs-6>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_knvokd6mgpbs-2>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_9y2lorhzuqk8-0>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_7df9o3emr75j-5 {
+            list-style-type: none
+        }
+
+        .lst-kix_9y2lorhzuqk8-8>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_7df9o3emr75j-6 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_7df9o3emr75j-3 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_7df9o3emr75j-4 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_7df9o3emr75j-7 {
+            list-style-type: none
+        }
+
+        .lst-kix_5v43iui7p2fu-2>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_7df9o3emr75j-8 {
+            list-style-type: none
+        }
+
+        .lst-kix_9y2lorhzuqk8-4>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_su6ki95zxf8m-0 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_su6ki95zxf8m-1 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_7df9o3emr75j-1 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_7df9o3emr75j-2 {
+            list-style-type: none
+        }
+
+        .lst-kix_t97d4ypzii5s-6>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_7df9o3emr75j-0 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_su6ki95zxf8m-6 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_su6ki95zxf8m-7 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_su6ki95zxf8m-8 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_su6ki95zxf8m-2 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_su6ki95zxf8m-3 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_qnhfv1bzhlzk-8 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_su6ki95zxf8m-4 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_qnhfv1bzhlzk-7 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_su6ki95zxf8m-5 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_qnhfv1bzhlzk-6 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_qnhfv1bzhlzk-5 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_qnhfv1bzhlzk-4 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_qnhfv1bzhlzk-3 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_qnhfv1bzhlzk-2 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_qnhfv1bzhlzk-1 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_qnhfv1bzhlzk-0 {
+            list-style-type: none
+        }
+
+        .lst-kix_t97d4ypzii5s-2>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_qzihy3ky6bw2-7>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_br35krqu1to0-1>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_lb67mj6fb0xp-6>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_7df9o3emr75j-7>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_qzihy3ky6bw2-3>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_br35krqu1to0-5>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_7df9o3emr75j-3>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_7z0as51640zo-5>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_6vmr9tt7b0xy-3>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_6vmr9tt7b0xy-7>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_su6ki95zxf8m-0>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_x6hrj3768g8u-4>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_x6hrj3768g8u-3>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_x6hrj3768g8u-5>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_t97d4ypzii5s-0 {
+            list-style-type: none
+        }
+
+        .lst-kix_x6hrj3768g8u-2>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_x6hrj3768g8u-6>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_ia4hz397rpem-0>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_t97d4ypzii5s-1 {
+            list-style-type: none
+        }
+
+        .lst-kix_x6hrj3768g8u-0>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_x6hrj3768g8u-7>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_x6hrj3768g8u-8>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_x6hrj3768g8u-1>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_ia4hz397rpem-7>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_ia4hz397rpem-8>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_7z0as51640zo-3>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_7z0as51640zo-2>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_7z0as51640zo-1>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_7z0as51640zo-0>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_qnhfv1bzhlzk-5>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_qnhfv1bzhlzk-4>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_qnhfv1bzhlzk-6>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_qnhfv1bzhlzk-3>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_qnhfv1bzhlzk-7>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_j070oqrfle7-8>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_j070oqrfle7-7>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_s6focx5bmbrv-8>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_qnhfv1bzhlzk-1>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_s6focx5bmbrv-7>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_j070oqrfle7-5>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_qnhfv1bzhlzk-0>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_qnhfv1bzhlzk-2>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_s6focx5bmbrv-6>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_j070oqrfle7-6>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_v09wxoh0k2i7-4 {
+            list-style-type: none
+        }
+
+        .lst-kix_s6focx5bmbrv-4>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_j070oqrfle7-0>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_v09wxoh0k2i7-3 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_v09wxoh0k2i7-2 {
+            list-style-type: none
+        }
+
+        .lst-kix_s6focx5bmbrv-3>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_s6focx5bmbrv-5>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_j070oqrfle7-1>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_v09wxoh0k2i7-1 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_v09wxoh0k2i7-0 {
+            list-style-type: none
+        }
+
+        .lst-kix_5v43iui7p2fu-5>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_5v43iui7p2fu-6>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_5v43iui7p2fu-7>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_j070oqrfle7-4>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_s6focx5bmbrv-1>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_j070oqrfle7-3>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_s6focx5bmbrv-2>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_j070oqrfle7-2>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_5v43iui7p2fu-8>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_ia4hz397rpem-6>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_ia4hz397rpem-5>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_ia4hz397rpem-4>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_t97d4ypzii5s-4 {
+            list-style-type: none
+        }
+
+        .lst-kix_s6focx5bmbrv-0>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_ia4hz397rpem-2>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_t97d4ypzii5s-5 {
+            list-style-type: none
+        }
+
+        .lst-kix_qnhfv1bzhlzk-8>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_t97d4ypzii5s-2 {
+            list-style-type: none
+        }
+
+        .lst-kix_ia4hz397rpem-1>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_ia4hz397rpem-3>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_t97d4ypzii5s-3 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_t97d4ypzii5s-8 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_v09wxoh0k2i7-8 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_v09wxoh0k2i7-7 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_t97d4ypzii5s-6 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_v09wxoh0k2i7-6 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_t97d4ypzii5s-7 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_v09wxoh0k2i7-5 {
+            list-style-type: none
+        }
+
+        .lst-kix_knvokd6mgpbs-5>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_o2n8mhsz351k-7 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_o2n8mhsz351k-6 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_o2n8mhsz351k-8 {
+            list-style-type: none
+        }
+
+        .lst-kix_knvokd6mgpbs-3>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_o2n8mhsz351k-1 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_o2n8mhsz351k-0 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_o2n8mhsz351k-3 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_o2n8mhsz351k-2 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_o2n8mhsz351k-5 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_o2n8mhsz351k-4 {
+            list-style-type: none
+        }
+
+        .lst-kix_knvokd6mgpbs-1>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_t97d4ypzii5s-3>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_5v43iui7p2fu-3>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_5v43iui7p2fu-1>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_9y2lorhzuqk8-0 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_9y2lorhzuqk8-3 {
+            list-style-type: none
+        }
+
+        .lst-kix_t97d4ypzii5s-7>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_9y2lorhzuqk8-4 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_9y2lorhzuqk8-1 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_9y2lorhzuqk8-2 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_9y2lorhzuqk8-7 {
+            list-style-type: none
+        }
+
+        .lst-kix_t97d4ypzii5s-5>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_9y2lorhzuqk8-8 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_9y2lorhzuqk8-5 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_9y2lorhzuqk8-6 {
+            list-style-type: none
+        }
+
+        .lst-kix_t97d4ypzii5s-1>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_knvokd6mgpbs-7>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_br35krqu1to0-6>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_5v43iui7p2fu-7 {
+            list-style-type: none
+        }
+
+        .lst-kix_qzihy3ky6bw2-0>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_5v43iui7p2fu-6 {
+            list-style-type: none
+        }
+
+        .lst-kix_br35krqu1to0-8>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_5v43iui7p2fu-8 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_5v43iui7p2fu-3 {
+            list-style-type: none
+        }
+
+        .lst-kix_qzihy3ky6bw2-6>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_5v43iui7p2fu-2 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_5v43iui7p2fu-5 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_5v43iui7p2fu-4 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_5v43iui7p2fu-1 {
+            list-style-type: none
+        }
+
+        .lst-kix_br35krqu1to0-2>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_5v43iui7p2fu-0 {
+            list-style-type: none
+        }
+
+        .lst-kix_qzihy3ky6bw2-2>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_qzihy3ky6bw2-4>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_br35krqu1to0-4>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_7z0as51640zo-4>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_6vmr9tt7b0xy-0>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_7z0as51640zo-6>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_6vmr9tt7b0xy-2>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_qzihy3ky6bw2-8>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_br35krqu1to0-0>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_7z0as51640zo-8>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_6vmr9tt7b0xy-6>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_6vmr9tt7b0xy-4>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_6vmr9tt7b0xy-8>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_su6ki95zxf8m-1>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_su6ki95zxf8m-2>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_pihx10uon2lv-8>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_x6hrj3768g8u-4 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_x6hrj3768g8u-3 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_x6hrj3768g8u-2 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_x6hrj3768g8u-1 {
+            list-style-type: none
+        }
+
+        .lst-kix_su6ki95zxf8m-5>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_x6hrj3768g8u-0 {
+            list-style-type: none
+        }
+
+        .lst-kix_su6ki95zxf8m-6>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_v09wxoh0k2i7-3>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_v09wxoh0k2i7-2>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_lb67mj6fb0xp-5>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_lb67mj6fb0xp-4>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_lb67mj6fb0xp-0>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_lb67mj6fb0xp-1>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_o0jw58wam5qi-4>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_o2n8mhsz351k-2>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_t97d4ypzii5s-8>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_o0jw58wam5qi-0>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_o2n8mhsz351k-1>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_o0jw58wam5qi-1>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_v09wxoh0k2i7-6>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_v09wxoh0k2i7-7>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_pihx10uon2lv-0>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_pihx10uon2lv-1>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_o2n8mhsz351k-5>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_o0jw58wam5qi-5>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_pihx10uon2lv-4>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_o2n8mhsz351k-6>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_o0jw58wam5qi-8>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_pihx10uon2lv-5>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_xovm0wjr89q5-6 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_xovm0wjr89q5-5 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_xovm0wjr89q5-4 {
+            list-style-type: none
+        }
+
+        .lst-kix_knvokd6mgpbs-4>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_xovm0wjr89q5-3 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_xovm0wjr89q5-2 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_xovm0wjr89q5-1 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_xovm0wjr89q5-0 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_7z0as51640zo-7 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_7z0as51640zo-8 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_7z0as51640zo-5 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_7z0as51640zo-6 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_xovm0wjr89q5-8 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_xovm0wjr89q5-7 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_7z0as51640zo-0 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_7z0as51640zo-3 {
+            list-style-type: none
+        }
+
+        .lst-kix_9y2lorhzuqk8-2>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_7z0as51640zo-4 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_7z0as51640zo-1 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_7z0as51640zo-2 {
+            list-style-type: none
+        }
+
+        .lst-kix_knvokd6mgpbs-0>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_5v43iui7p2fu-4>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_9y2lorhzuqk8-6>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_t97d4ypzii5s-0>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_t97d4ypzii5s-4>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_lb67mj6fb0xp-1 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_lb67mj6fb0xp-2 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_lb67mj6fb0xp-0 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_lb67mj6fb0xp-5 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_lb67mj6fb0xp-6 {
+            list-style-type: none
+        }
+
+        .lst-kix_xovm0wjr89q5-0>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_lb67mj6fb0xp-3 {
+            list-style-type: none
+        }
+
+        .lst-kix_5v43iui7p2fu-0>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_lb67mj6fb0xp-4 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_lb67mj6fb0xp-7 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_lb67mj6fb0xp-8 {
+            list-style-type: none
+        }
+
+        .lst-kix_knvokd6mgpbs-8>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_qzihy3ky6bw2-1>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_br35krqu1to0-7>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_br35krqu1to0-3>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_qzihy3ky6bw2-5>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_lb67mj6fb0xp-8>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_7df9o3emr75j-5>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_7df9o3emr75j-1>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_6vmr9tt7b0xy-1>li:before {
+            content: "-  "
+        }
+
+        .lst-kix_7z0as51640zo-7>li:before {
+            content: "-  "
+        }
+
+        ul.lst-kix_x6hrj3768g8u-8 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_x6hrj3768g8u-7 {
+            list-style-type: none
+        }
+
+        li.li-bullet-0:before {
+            margin-left: -18pt;
+            white-space: nowrap;
+            display: inline-block;
+            min-width: 18pt
+        }
+
+        ul.lst-kix_x6hrj3768g8u-6 {
+            list-style-type: none
+        }
+
+        ul.lst-kix_x6hrj3768g8u-5 {
+            list-style-type: none
+        }
+
+        .lst-kix_6vmr9tt7b0xy-5>li:before {
+            content: "-  "
+        }
+
+        ol {
+            margin: 0;
+            padding: 0
+        }
+
+        table td,
+        table th {
+            padding: 0
+        }
+
+        .c47 {
+            border-right-style: solid;
+            padding: 5pt 5pt 5pt 5pt;
+            border-bottom-color: #ffffff;
+            border-top-width: 0pt;
+            border-right-width: 0pt;
+            border-left-color: #ffffff;
+            vertical-align: top;
+            border-right-color: #ffffff;
+            border-left-width: 0pt;
+            border-top-style: solid;
+            background-color: #ffe599;
+            border-left-style: solid;
+            border-bottom-width: 0pt;
+            width: 133.5pt;
+            border-top-color: #ffffff;
+            border-bottom-style: solid
+        }
+
+        .c26 {
+            border-right-style: solid;
+            padding: 5pt 5pt 5pt 5pt;
+            border-bottom-color: #ffffff;
+            border-top-width: 1pt;
+            border-right-width: 1pt;
+            border-left-color: #ffffff;
+            vertical-align: top;
+            border-right-color: #ffffff;
+            border-left-width: 1pt;
+            border-top-style: solid;
+            background-color: #ffe599;
+            border-left-style: solid;
+            border-bottom-width: 1pt;
+            width: 125.2pt;
+            border-top-color: #ffffff;
+            border-bottom-style: solid
+        }
+
+        .c9 {
+            border-right-style: solid;
+            padding: 5pt 5pt 5pt 5pt;
+            border-bottom-color: #ffffff;
+            border-top-width: 1pt;
+            border-right-width: 1pt;
+            border-left-color: #ffffff;
+            vertical-align: bottom;
+            border-right-color: #ffffff;
+            border-left-width: 1pt;
+            border-top-style: solid;
+            background-color: #ffffff;
+            border-left-style: solid;
+            border-bottom-width: 1pt;
+            width: 292.5pt;
+            border-top-color: #ffffff;
+            border-bottom-style: solid
+        }
+
+        .c51 {
+            border-right-style: solid;
+            padding: 5pt 5pt 5pt 5pt;
+            border-bottom-color: #ffffff;
+            border-top-width: 0pt;
+            border-right-width: 0pt;
+            border-left-color: #ffffff;
+            vertical-align: top;
+            border-right-color: #ffffff;
+            border-left-width: 0pt;
+            border-top-style: solid;
+            background-color: #ffe599;
+            border-left-style: solid;
+            border-bottom-width: 0pt;
+            width: 212.2pt;
+            border-top-color: #ffffff;
+            border-bottom-style: solid
+        }
+
+        .c20 {
+            border-right-style: solid;
+            padding: 5pt 5pt 5pt 5pt;
+            border-bottom-color: #ffffff;
+            border-top-width: 1pt;
+            border-right-width: 1pt;
+            border-left-color: #ffffff;
+            vertical-align: top;
+            border-right-color: #ffffff;
+            border-left-width: 1pt;
+            border-top-style: solid;
+            background-color: #fff2cc;
+            border-left-style: solid;
+            border-bottom-width: 1pt;
+            width: 90.8pt;
+            border-top-color: #ffffff;
+            border-bottom-style: solid
+        }
+
+        .c10 {
+            border-right-style: solid;
+            padding: 5pt 5pt 5pt 5pt;
+            border-bottom-color: #ffffff;
+            border-top-width: 0pt;
+            border-right-width: 0pt;
+            border-left-color: #ffffff;
+            vertical-align: top;
+            border-right-color: #ffffff;
+            border-left-width: 0pt;
+            border-top-style: solid;
+            background-color: #ffe599;
+            border-left-style: solid;
+            border-bottom-width: 0pt;
+            width: 287.2pt;
+            border-top-color: #ffffff;
+            border-bottom-style: solid
+        }
+
+        .c54 {
+            border-right-style: solid;
+            padding: 5pt 5pt 5pt 5pt;
+            border-bottom-color: #ffffff;
+            border-top-width: 0pt;
+            border-right-width: 0pt;
+            border-left-color: #ffffff;
+            vertical-align: top;
+            border-right-color: #ffffff;
+            border-left-width: 0pt;
+            border-top-style: solid;
+            border-left-style: solid;
+            border-bottom-width: 0pt;
+            width: 153.8pt;
+            border-top-color: #ffffff;
+            border-bottom-style: solid
+        }
+
+        .c41 {
+            border-right-style: solid;
+            padding: 5pt 5pt 5pt 5pt;
+            border-bottom-color: #ffffff;
+            border-top-width: 0pt;
+            border-right-width: 0pt;
+            border-left-color: #ffffff;
+            vertical-align: top;
+            border-right-color: #ffffff;
+            border-left-width: 0pt;
+            border-top-style: solid;
+            border-left-style: solid;
+            border-bottom-width: 0pt;
+            width: 366pt;
+            border-top-color: #ffffff;
+            border-bottom-style: solid
+        }
+
+        .c34 {
+            border-right-style: solid;
+            padding: 5pt 5pt 5pt 5pt;
+            border-bottom-color: #000000;
+            border-top-width: 1pt;
+            border-right-width: 1pt;
+            border-left-color: #000000;
+            vertical-align: top;
+            border-right-color: #000000;
+            border-left-width: 1pt;
+            border-top-style: solid;
+            border-left-style: solid;
+            border-bottom-width: 1pt;
+            width: 207.4pt;
+            border-top-color: #000000;
+            border-bottom-style: solid
+        }
+
+        .c61 {
+            border-right-style: solid;
+            padding: 5pt 5pt 5pt 5pt;
+            border-bottom-color: #ffffff;
+            border-top-width: 0pt;
+            border-right-width: 0pt;
+            border-left-color: #ffffff;
+            vertical-align: top;
+            border-right-color: #ffffff;
+            border-left-width: 0pt;
+            border-top-style: solid;
+            border-left-style: solid;
+            border-bottom-width: 0pt;
+            width: 133.5pt;
+            border-top-color: #ffffff;
+            border-bottom-style: solid
+        }
+
+        .c21 {
+            border-right-style: solid;
+            padding: 5pt 5pt 5pt 5pt;
+            border-bottom-color: #000000;
+            border-top-width: 1pt;
+            border-right-width: 1pt;
+            border-left-color: #000000;
+            vertical-align: top;
+            border-right-color: #000000;
+            border-left-width: 1pt;
+            border-top-style: solid;
+            border-left-style: solid;
+            border-bottom-width: 1pt;
+            width: 271.1pt;
+            border-top-color: #000000;
+            border-bottom-style: solid
+        }
+
+        .c8 {
+            margin-left: 72pt;
+            padding-top: 0pt;
+            padding-left: 0pt;
+            padding-bottom: 10pt;
+            line-height: 1.15;
+            orphans: 2;
+            widows: 2;
+            text-align: justify;
+            margin-right: 12.9pt
+        }
+
+        .c30 {
+            padding-top: 0pt;
+            padding-bottom: 3pt;
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left;
+            margin-right: 12.9pt;
+            height: 11pt
+        }
+
+        .c5 {
+            margin-left: 36pt;
+            padding-top: 0pt;
+            padding-left: 0pt;
+            padding-bottom: 10pt;
+            line-height: 1.15;
+            orphans: 2;
+            widows: 2;
+            text-align: justify;
+            margin-right: 12.9pt
+        }
+
+        .c13 {
+            padding-top: 0pt;
+            padding-bottom: 0pt;
+            line-height: 1.0;
+            orphans: 2;
+            widows: 2;
+            text-align: left;
+            margin-right: 12.9pt;
+            height: 11pt
+        }
+
+        .c16 {
+            padding-top: 0pt;
+            padding-bottom: 0pt;
+            line-height: 1.15;
+            orphans: 2;
+            widows: 2;
+            text-align: left;
+            margin-right: 12.9pt;
+            height: 11pt
+        }
+
+        .c2 {
+            padding-top: 0pt;
+            padding-bottom: 10pt;
+            line-height: 1.15;
+            orphans: 2;
+            widows: 2;
+            text-align: left;
+            margin-right: 12.9pt;
+            height: 11pt
+        }
+
+        .c0 {
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 12pt;
+            font-family: "Calibri";
+            font-style: normal
+        }
+
+        .c6 {
+            padding-top: 0pt;
+            padding-bottom: 0pt;
+            line-height: 1.0;
+            orphans: 2;
+            widows: 2;
+            text-align: right;
+            margin-right: 12.9pt
+        }
+
+        .c18 {
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 11pt;
+            font-family: "Arial";
+            font-style: normal
+        }
+
+        .c4 {
+            padding-top: 0pt;
+            padding-bottom: 10pt;
+            line-height: 1.15;
+            orphans: 2;
+            widows: 2;
+            text-align: left;
+            margin-right: 12.9pt
+        }
+
+        .c23 {
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none;
+            vertical-align: baseline;
+            font-size: 14pt;
+            font-family: "Calibri";
+            font-style: normal
+        }
+
+        .c11 {
+            padding-top: 0pt;
+            padding-bottom: 10pt;
+            line-height: 1.15;
+            orphans: 2;
+            widows: 2;
+            text-align: justify;
+            margin-right: 12.9pt
+        }
+
+        .c48 {
+            color: #666666;
+            font-weight: 400;
+            vertical-align: baseline;
+            font-size: 20pt;
+            font-family: "Lobster";
+            font-style: normal
+        }
+
+        .c7 {
+            margin-left: 36pt;
+            padding-top: 0pt;
+            padding-bottom: 0pt;
+            line-height: 1.0;
+            padding-left: 0pt;
+            text-align: left
+        }
+
+        .c28 {
+            padding-top: 0pt;
+            padding-bottom: 0pt;
+            line-height: 1.15;
+            text-align: left;
+            height: 11pt
+        }
+
+        .c58 {
+            padding-top: 0pt;
+            padding-bottom: 3pt;
+            line-height: 1.15;
+            page-break-after: avoid;
+            text-align: left
+        }
+
+        .c53 {
+            padding-top: 0pt;
+            padding-bottom: 16pt;
+            line-height: 1.15;
+            page-break-after: avoid;
+            text-align: left
+        }
+
+        .c29 {
+            padding-top: 0pt;
+            padding-bottom: 0pt;
+            line-height: 1.0;
+            text-align: right;
+            margin-right: 12.9pt
+        }
+
+        .c42 {
+            padding-top: 0pt;
+            padding-bottom: 0pt;
+            line-height: 1.0;
+            text-align: center;
+            margin-right: 12.9pt
+        }
+
+        .c19 {
+            margin-left: 36pt;
+            border-spacing: 0;
+            border-collapse: collapse;
+            margin-right: auto
+        }
+
+        .c37 {
+            font-weight: 400;
+            text-decoration: none;
+            font-size: 1pt;
+            font-family: "Arial"
+        }
+
+        .c38 {
+            font-weight: 400;
+            text-decoration: none;
+            font-size: 6pt;
+            font-family: "Calibri"
+        }
+
+        .c62 {
+            padding-top: 0pt;
+            padding-bottom: 0pt;
+            line-height: 1.0;
+            text-align: center
+        }
+
+        .c39 {
+            font-weight: 400;
+            text-decoration: none;
+            font-size: 11pt;
+            font-family: "Calibri"
+        }
+
+        .c43 {
+            margin-left: auto;
+            border-spacing: 0;
+            border-collapse: collapse;
+            margin-right: auto
+        }
+
+        .c36 {
+            margin-left: -0.8pt;
+            border-spacing: 0;
+            border-collapse: collapse;
+            margin-right: auto
+        }
+
+        .c52 {
+            padding-top: 0pt;
+            padding-bottom: 0pt;
+            line-height: 1.0;
+            text-align: left
+        }
+
+        .c45 {
+            padding-top: 0pt;
+            padding-bottom: 0pt;
+            line-height: 1.15;
+            text-align: left
+        }
+
+        .c56 {
+            background-color: #ffffff;
+            max-width: 515.9pt;
+            padding: 34pt 39.7pt 36pt 39.7pt
+        }
+
+        .c15 {
+            text-decoration-skip-ink: none;
+            -webkit-text-decoration-skip: none;
+            text-decoration: underline
+        }
+
+        .c35 {
+            color: #000000;
+            vertical-align: baseline;
+            font-style: normal
+        }
+
+        .c55 {
+            font-weight: 400;
+            font-size: 26pt;
+            font-family: "Calibri"
+        }
+
+        .c60 {
+            font-size: 36pt;
+            font-weight: 400;
+            font-family: "Calibri"
+        }
+
+        .c27 {
+            font-size: 9pt;
+            font-weight: 400;
+            font-family: "Calibri"
+        }
+
+        .c17 {
+            font-size: 20pt;
+            font-weight: 300;
+            font-family: "Ubuntu"
+        }
+
+        .c1 {
+            font-size: 12pt;
+            font-weight: 400;
+            font-family: "Calibri"
+        }
+
+        .c14 {
+            font-size: 12pt;
+            font-weight: 700;
+            font-family: "Calibri"
+        }
+
+        .c25 {
+            padding: 0;
+            margin: 0
+        }
+
+        .c50 {
+            orphans: 2;
+            widows: 2
+        }
+
+        .c32 {
+            color: inherit;
+            text-decoration: inherit
+        }
+
+        .c31 {
+            height: 11pt
+        }
+
+        .c12 {
+            font-size: 8pt
+        }
+
+        .c3 {
+            height: 22pt
+        }
+
+        .c33 {
+            margin-left: 36pt
+        }
+
+        .c44 {
+            text-decoration: none
+        }
+
+        .c46 {
+            margin-right: 12.9pt
+        }
+
+        .c22 {
+            font-style: italic
+        }
+
+        .c24 {
+            color: #1155cc
+        }
+
+        .c57 {
+            height: 136pt
+        }
+
+        .c59 {
+            height: 21pt
+        }
+
+        .c40 {
+            font-weight: 700
+        }
+
+        .c49 {
+            height: 0pt
+        }
+
+        .title {
+            padding-top: 0pt;
+            color: #000000;
+            font-size: 26pt;
+            padding-bottom: 3pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        .subtitle {
+            padding-top: 0pt;
+            color: #666666;
+            font-size: 15pt;
+            padding-bottom: 16pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        li {
+            color: #000000;
+            font-size: 11pt;
+            font-family: "Arial"
+        }
+
+        p {
+            margin: 0;
+            color: #000000;
+            font-size: 11pt;
+            font-family: "Arial"
+        }
+
+        h1 {
+            padding-top: 20pt;
+            color: #000000;
+            font-size: 20pt;
+            padding-bottom: 6pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h2 {
+            padding-top: 18pt;
+            color: #000000;
+            font-size: 16pt;
+            padding-bottom: 6pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h3 {
+            padding-top: 16pt;
+            color: #434343;
+            font-size: 14pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h4 {
+            padding-top: 14pt;
+            color: #666666;
+            font-size: 12pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h5 {
+            padding-top: 12pt;
+            color: #666666;
+            font-size: 11pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        h6 {
+            padding-top: 12pt;
+            color: #666666;
+            font-size: 11pt;
+            padding-bottom: 4pt;
+            font-family: "Arial";
+            line-height: 1.15;
+            page-break-after: avoid;
+            font-style: italic;
+            orphans: 2;
+            widows: 2;
+            text-align: left
+        }
+
+        /* Botón flotante */
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .floating-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <title>Presupuesto Boda</title>
+</head>
+
+<body class="c56 doc-content">
+
+    <table class="c36">
+        <tr class="c57">
+            <td class="c41" colspan="2" rowspan="1">
+                <p class="c50 c46 c58 title" id="h.89nennx1ixng"><span class="c60">Presupuesto</span><span
+                        class="c35 c44 c55">&nbsp;</span></p>
+                <p class="c50 c46 c53 subtitle" id="h.a2u1karcctw2"><span class="c17">Actuaci&oacute;n musical La Buena
+                        Onda con Jadey en la </span><span class="c44 c48">boda de ##nombres</span></p>
+            </td>
+            <td class="c61" colspan="1" rowspan="1">
+                <p class="c42"><span
+                        style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 164.00px; height: 164.00px;"><img
+                            alt="" src="../imagenes/lboj_logo.png"
+                            style="width: 164.00px; height: 164.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);"
+                            title=""></span></p>
+            </td>
+        </tr>
+        <tr class="c59">
+            <td class="c51" colspan="1" rowspan="1">
+                <p class="c45 c46 c50"><span class="c0">Fecha de emisi&oacute;n: &nbsp;##fecha </span></p>
+            </td>
+            <td class="c10" colspan="2" rowspan="1">
+                <p class="c6"><span class="c1">Tel&eacute;fono de contacto: </span><span class="c14">+34 699 454
+                        802</span><span class="c0">&nbsp;(Jadey)</span></p>
+            </td>
+        </tr>
+    </table>
+    <p class="c30 title" id="h.524d7idk0ysn"><span class="c23"></span></p>
+    <p class="c11"><span class="c0">DESCRIPCI&Oacute;N DE LOS SERVICIOS OFERTADOS:</span></p>
+    <ul class="c25 lst-kix_7df9o3emr75j-0 start">
+        <li class="c5 li-bullet-0"><span class="c1">Actuaci&oacute;n musical en directo con </span><span class="c14">5
+                m&uacute;sicos </span><span class="c1">(bater&iacute;a, bajo, teclado, guitarra y voz) </span><span>y
+            </span><span class="c40">un t&eacute;cnico de sonido</span><span class="c1">. Programada para el d&iacute;a
+            </span><span class="c14">##fechaactuacion</span><span class="c1">&nbsp;en </span><span class="c14">##espacio
+            </span><span class="c1">(##localidad) </span><span class="c1">con motivo de la celebraci&oacute;n de la boda
+                de </span><span class="c14">##nombres</span><span class="c0">. </span></li>
+        <li class="c5 li-bullet-0"><span class="c0">La actuaci&oacute;n est&aacute; programada para el ##tipoevento,
+                aproximadamente a las ##horas horas.</span></li>
+        <li class="c5 li-bullet-0"><span class="c0">La duraci&oacute;n de la actuaci&oacute;n es de 1 hora y media,
+                siendo posible, si as&iacute; se desea, dividir el espect&aacute;culo en dos pases de 45 minutos con un
+                descanso entre medias. </span></li>
+        <li class="c5 li-bullet-0"><span class="c0">El estilo musical oscila entre el pop y el rock con versiones en
+                espa&ntilde;ol desde los 80 hasta la actualidad. </span></li>
+        <li class="c5 li-bullet-0"><span class="c1">El repertorio se puede consultar en este </span><span
+                class="c15 c1 c24"><a class="c32"
+                    href="https://www.google.com/url?q=https://docs.google.com/spreadsheets/d/1bWhwV_TV5sF79Z2qsWmUBLWTx_LN0e3fbxZ-TAPu8yg/edit?usp%3Dsharing&amp;sa=D&amp;source=editors&amp;ust=1747787888538770&amp;usg=AOvVaw09hZXYkMY_yUFjnDX_B2ka">link</a></span><span
+                class="c1">. Se podr&aacute;n modificar algunas canciones del repertorio previo acuerdo con la banda en
+                el momento de cierre del concierto. Las canciones de sustituci&oacute;n se deber&aacute;n elegir
+                idealmente entre las de la siguiente </span><span class="c15 c1 c24"><a class="c32"
+                    href="https://www.google.com/url?q=https://docs.google.com/spreadsheets/d/1ORoVUyW7AERwjh2RcCEuX2nYIKWUyuPxKTZ2_DkWm-4/edit%23gid%3D0&amp;sa=D&amp;source=editors&amp;ust=1747787888539366&amp;usg=AOvVaw3D-C_t5bB386AdzBDzGn20">lista</a></span><span
+                class="c1">. Se deben de elegir un total de 24 canciones. </span></li>
+        <li class="c5 li-bullet-0"><span class="c0">El precio incluye montaje, desmontaje del equipo de sonido descrito
+                en las condiciones generales, sonorizaci&oacute;n del espect&aacute;culo y transporte de personal y
+                equipo hasta el lugar de celebraci&oacute;n. </span></li>
+    </ul>
+    <ul class="c25 lst-kix_ia4hz397rpem-0 start">
+        <li class="c5 li-bullet-0"><span class="c0">Hay opci&oacute;n de mantener el equipo para la discom&oacute;vil.
+                El precio es de 100&euro; + IVA la hora o de 150&euro; + IVA la hora incluyendo poner m&uacute;sica
+                (playlist). </span></li>
+    </ul>
+    <p class="c11 c31"><span class="c0"></span></p>
+    <div class="page-break"></div>
+    <p class="c11"><span class="c0">CONDICIONES GENERALES:</span></p>
+    <p class="c11"><span class="c0">Por favor, lea con cautela cada punto y p&oacute;ngase en contacto con nosotros si
+            tiene alguna duda. El cumplimiento de las condiciones es necesario para asegurar un buen curso del
+            espect&aacute;culo. Nos pondremos en contacto con el responsable de la finca para comunicarle las
+            necesidades t&eacute;cnicas y condiciones de la actuaci&oacute;n. </span></p>
+    <ul class="c25 lst-kix_su6ki95zxf8m-0 start">
+        <li class="c5 li-bullet-0"><span class="c15 c1">Horarios</span><span class="c1">: la banda necesitar&aacute;
+                un</span><span class="c14">&nbsp;m&iacute;nimo de 2 horas antes del inicio de la
+                actuaci&oacute;n</span><span class="c1">&nbsp;para el montaje y prueba de sonido</span><span
+                class="c1">. En la </span><span class="c14">&uacute;ltima hora tendr&aacute; lugar la prueba de
+                sonido</span><span class="c1">, para lo cual es necesario que la banda pueda emitir un </span><span
+                class="c14">nivel sonoro igual al del espect&aacute;culo en directo posterior</span><span class="c0">.
+                Esto puede ser incompatible con la celebraci&oacute;n de cualquier tipo de evento en la misma
+                localizaci&oacute;n o en su cercan&iacute;a. Se puede realizar el &nbsp;montaje y prueba de sonido en el
+                horario que sea necesario, teniendo en cuenta las indicaciones del personal del recinto donde se celebre
+                el concierto, siempre que el tiempo destinado a ello sea suficiente. </span></li>
+        <li class="c5 li-bullet-0"><span class="c15 c1">Necesidades t&eacute;cnicas</span><span class="c1">: es
+                necesario disponer de una</span><span class="c14">&nbsp;toma de corriente de 220V estables, que soporte
+                3500W</span><span class="c0">&nbsp;de pico para el montaje, prueba, desmontaje y curso del
+                espect&aacute;culo. La toma de corriente debe de estar situada en el escenario o lugar donde se
+                realizar&aacute; la actuaci&oacute;n. </span></li>
+        <li class="c5 li-bullet-0"><span class="c15 c35 c1">Equipo de la banda:</span></li>
+    </ul>
+    <table class="c19">
+        <tr class="c49">
+            <td class="c21" colspan="1" rowspan="1">
+                <p class="c62"><span class="c0">Sonido</span></p>
+            </td>
+            <td class="c34" colspan="1" rowspan="1">
+                <p class="c62"><span class="c0">Luces</span></p>
+            </td>
+        </tr>
+        <tr class="c49">
+            <td class="c21" colspan="1" rowspan="1">
+                <ul class="c25 lst-kix_lb67mj6fb0xp-0 start">
+                    <li class="c7 li-bullet-0"><span class="c0">Dos altavoces de 15 pulgadas Mackie Thump de 1000W de
+                            pico cada una. Un altavoz de graves Turbosound IQ18B de 3000W</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">Microfon&iacute;a y cableado (un micr&oacute;fono
+                            inal&aacute;mbrico, microfon&iacute;a para la bater&iacute;a, cajas de inyecci&oacute;n para
+                            instrumentos, etc). Todo lo necesario para conectar nuestros instrumentos a la mesa de
+                            mezclas.</span></li>
+                    <li class="c7 li-bullet-0"><span class="c1">Monitorizaci&oacute;n &ldquo;</span><span
+                            class="c1 c22">In-ear</span><span class="c0">&rdquo; inal&aacute;mbrica.</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">Dos sistemas inal&aacute;mbricos para
+                            instrumentos</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">Mesa de mezclas MIDAS MR18</span></li>
+                </ul>
+            </td>
+            <td class="c34" colspan="1" rowspan="1">
+                <ul class="c25 lst-kix_o0jw58wam5qi-0 start">
+                    <li class="c7 li-bullet-0"><span class="c0">Dos focos fijos led de 25W cada uno con temperatura e
+                            intensidad regulables.</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">Dos focos fijos Thunderwash 600 RGBW de Cameo
+                            sincronizados con la m&uacute;sica.</span></li>
+                    <li class="c7 li-bullet-0"><span class="c0">Un foco trasero tipo blinder led de 70W
+                            &nbsp;sincronizado con la m&uacute;sica. </span></li>
+                    <li class="c7 li-bullet-0"><span class="c1">M&aacute;quina de humo apta para interiores de 30W.
+                        </span></li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+    <p class="c11 c33"><span class="c0">Importante: en este presupuesto no viene inclu&iacute;da una tarima para la
+            actuaci&oacute;n. En caso de que el lugar de celebraci&oacute;n del concierto no la aporte, si se desea,
+            ser&iacute;a necesario incluirla en el presupuesto. </span></p>
+    <p class="c11 c33"><span class="c0">En caso de que el espect&aacute;culo se realice con luz diurna no se montan las
+            luces. En caso de que el espect&aacute;culo se realice en el exterior no se monta la m&aacute;quina de humo.
+        </span></p>
+    <p class="c11 c33"><span class="c0">El equipo de la banda puede variar desde la expedici&oacute;n del presupuesto
+            hasta la fecha del espect&aacute;culo, pero siempre por elementos de calidad y potencia igual o superior.
+        </span></p>
+    <div class="page-break"></div>
+    <ul class="c25 lst-kix_v09wxoh0k2i7-0 start">
+        <li class="c5 li-bullet-0"><span class="c15 c1">Seguridad</span><span class="c0">:</span></li>
+    </ul>
+    <ul class="c25 lst-kix_m8u2i1o0jnu0-0 start">
+        <li class="c8 li-bullet-0"><span class="c14">Si la actuaci&oacute;n est&aacute; planificada para el exterior,
+                con m&iacute;nimas previsiones de precipitaciones o malas condiciones ambientales, &eacute;sta
+                deber&aacute; realizarse en un espacio interior o no podr&aacute; ser realizada</span><span class="c1">.
+                Si durante la actuaci&oacute;n o la prueba llueve (aunque sea poco) o hay condiciones
+                meteorol&oacute;gicas adversas, &eacute;sta se deber&aacute; suspender (suelo mojado, viento a
+                m&aacute;s de 25 km/h). Durante los meses de mayo a octubre,</span><span class="c14">&nbsp;si la
+                temperatura exterior supera los 20&ordm;C, ser&aacute; necesario proporcionar una sombra</span><span
+                class="c1">&nbsp;si la actuaci&oacute;n est&aacute; planificada al aire libre al mediod&iacute;a o por
+                la tarde, con motivo de protecci&oacute;n del equipo de sonido y el personal.</span></li>
+    </ul>
+    <ul class="c25 lst-kix_pihx10uon2lv-0 start">
+        <li class="c8 li-bullet-0"><span class="c1">La </span><span class="c14">seguridad y respeto de las medidas
+                sanitarias durante el espect&aacute;culo no recaer&aacute; bajo ning&uacute;n concepto en
+                responsabilidad</span><span class="c1">&nbsp;de ninguno de los integrantes o trabajadores </span><span
+                class="c14">de la banda</span><span class="c1">, estando &eacute;sta y todos sus integrantes y
+                trabajadores obligados a seguir las indicaciones de las personas u organizaciones que se hagan cargo de
+                tal aspecto.</span></li>
+    </ul>
+    <ul class="c25 lst-kix_9y2lorhzuqk8-0 start">
+        <li class="c5 li-bullet-0"><span class="c15 c1 c35">Normativa:</span></li>
+    </ul>
+    <ul class="c25 lst-kix_pihx10uon2lv-0">
+        <li class="c8 li-bullet-0"><span class="c14">La banda se responsabiliza de dar de alta, dentro del periodo
+                legal, a todos sus trabajadores en el R&eacute;gimen General de la Seguridad Social</span><span
+                class="c0">. </span></li>
+        <li class="c8 li-bullet-0"><span class="c0">El responsable de la banda cuenta con un seguro de responsabilidad
+                civil. </span></li>
+        <li class="c8 li-bullet-0"><span class="c0">Disponemos de son&oacute;metro y limitador de sonido para ajustarnos
+                a las normativa de ruidos. En caso de haber problemas con el ruido en el lugar de celebraci&oacute;n del
+                concierto, se deber&aacute; comunicar al responsable de la banda. </span></li>
+    </ul>
+    <p class="c11 c31 c33"><span class="c35 c38"></span></p>
+    <!--hr style="page-break-before:always;display:none;"-->
+    <div class="page-break"></div>
+    <p class="c11"><span class="c0">CONDICIONES DE PAGO:</span></p>
+    <ul class="c25 lst-kix_6vmr9tt7b0xy-0 start">
+        <li class="c5 li-bullet-0"><span class="c14">Para bloquear la fecha se pide un adelanto de la mitad del
+                importe</span><span class="c0">. </span></li>
+    </ul>
+    <ul class="c25 lst-kix_6vmr9tt7b0xy-1 start">
+        <li class="c8 li-bullet-0"><span class="c1 c15">Cancelaci&oacute;n</span><span class="c35 c14 c44">: una vez
+                realizado el primer pago, se genera una responsabilidad contractual expresa. En caso de
+                suspensi&oacute;n del concierto por la parte contratante, por mal tiempo o previsi&oacute;n de este,
+                siniestro, o cualquier otra causa ajena, no se devolver&aacute; el adelanto de la mitad del importe
+                (primera factura). </span></li>
+        <li class="c8 li-bullet-0"><span class="c15 c1">Cancelaci&oacute;n con menos de 24 horas de
+                antelaci&oacute;n:</span><span class="c1">&nbsp;en caso de cancelaci&oacute;n del evento con
+            </span><span class="c14">menos de 24 horas de antelaci&oacute;n</span><span class="c1">&nbsp;al d&iacute;a
+                de celebraci&oacute;n del evento, </span><span class="c14">ser&aacute; obligatorio abonar el 100% del
+                importe del espect&aacute;culo.</span><span class="c0">&nbsp;</span></li>
+        <li class="c8 li-bullet-0"><span class="c15 c1">Cancelaci&oacute;n covid</span><span class="c0">: si el evento
+                no se puede celebrar por motivos sanitarios, es decir, hay una ley que proh&iacute;ba la
+                celebraci&oacute;n de eventos de tal magnitud, el grupo devolver&aacute; el importe abonado en el
+                adelanto independientemente del momento de la cancelaci&oacute;n. </span></li>
+        <li class="c8 li-bullet-0"><span class="c15 c1">Cancelaci&oacute;n por baja laboral:</span><span
+                class="c1">&nbsp;si el evento no se pudiese celebrar por baja m&eacute;dica de alg&uacute;n integrante
+                esencial en la banda (cantante), se comunicar&iacute;a a la parte contratante en cuanto se sepa,
+                aportando los correspondientes documentos que justifiquen la situaci&oacute;n </span><span class="c14">y
+                se devolver&iacute;a el 100% del adelanto</span><span class="c0">. Se aportar&iacute;an alternativas y
+                quedar&iacute;a a decisi&oacute;n de la parte contratante aceptarlas o no. </span></li>
+    </ul>
+    <ul class="c25 lst-kix_6vmr9tt7b0xy-0">
+        <li class="c5 li-bullet-0"><span class="c0">El abono del importe deber&aacute; de realizarse por transferencia,
+                al tratarse de un importe mayor a 1000&euro;, tal y como exige la normativa vigente. </span></li>
+    </ul>
+    <p class="c11 c31"><span class="c38 c35"></span></p>
+    <p class="c2"><span class="c0"></span></p>
+    <p class="c2"><span class="c0"></span></p>
+    <p class="c2"><span class="c0"></span></p>
+    <p class="c2"><span class="c0"></span></p>
+    <p class="c2"><span class="c0"></span></p>
+    <p class="c4"><span class="c0">PRESUPUESTO DE LA ACTUACI&Oacute;N:</span></p>
+    <table class="c43">
+        <tr class="c3">
+            <td class="c9" colspan="1" rowspan="3">
+                <p class="c45 c46"><span class="c12">Este presupuesto tiene una validez de 31 d&iacute;as desde la fecha
+                        de emisi&oacute;n. Transcurrido este periodo es posible que haya variaciones en el
+                        precio.</span></p>
+            </td>
+            <td class="c26" colspan="1" rowspan="1">
+                <p class="c29"><span class="c0">Total SIN IVA</span></p>
+            </td>
+            <td class="c20" colspan="1" rowspan="1">
+                <p class="c46 c52"><span class="c0">##siniva</span></p>
+            </td>
+        </tr>
+        <tr class="c3">
+            <td class="c26" colspan="1" rowspan="1">
+                <p class="c29"><span class="c0">IVA: ##porc</span></p>
+            </td>
+            <td class="c20" colspan="1" rowspan="1">
+                <p class="c52 c46"><span class="c0">##iva</span></p>
+            </td>
+        </tr>
+        <tr class="c3">
+            <td class="c26" colspan="1" rowspan="1">
+                <p class="c29"><span class="c0">TOTAL A ABONAR</span></p>
+            </td>
+            <td class="c20" colspan="1" rowspan="1">
+                <p class="c52 c46"><span class="c0">##final</span></p>
+            </td>
+        </tr>
+    </table>
+    <p class="c16"><span class="c18"></span></p>
+    <div>
+        <p class="c28"><span class="c35 c27 c44"></span></p>
+        <p class="c45"><span class="c27">NOTA LEGAL: La informaci&oacute;n contenida en este presupuesto es confidencial
+                y privilegiada para uso exclusivo de la persona o personas a las que va dirigido. No est&aacute;
+                permitida cualquier duplicaci&oacute;n, reproducci&oacute;n o distribuci&oacute;n, as&iacute; como
+                cualquier uso de la informaci&oacute;n contenida, est&aacute; prohibido y es ilegal</span></p>
+        <p class="c28"><span class="c18"></span></p>
+    </div>
+    <!-- Botón flotante para imprimir -->
+    <div class="floating-btn" id="download-btn" onclick="pdfPage()">⬇</div>
+
+
+    <script>
+        const button = document.getElementById('download-btn');
+
+        button.addEventListener('click', () => {
+            // Seleccionar el contenido que queremos convertir en PDF
+            const content = document.body;
+
+            // Configuración de html2pdf
+            const options = {
+                margin: [2, 0.5, 0.5, 0.5],
+                filename: 'Presupuesto_Boda.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'cm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Ocultar el botón antes de generar el PDF
+            button.style.display = 'none';
+
+            // Generar el PDF
+            html2pdf().set(options).from(content).save().then(() => {
+                // Volver a mostrar el botón después de generar el PDF
+                button.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+
+</html>

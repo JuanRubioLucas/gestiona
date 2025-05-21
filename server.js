@@ -94,6 +94,35 @@ app.get('/presupuestos', authenticateToken, (req, res) => {
     });
 });
 
+// Ruta para obtener los detalles de un presupuesto específico
+app.get('/presupuesto', authenticateToken, (req, res) => {
+    const idPresupuesto = req.headers['idpresupuesto']; // ID del usuario autenticado
+
+
+    if (!idPresupuesto) {
+        return res.status(400).json({ error: 'El ID del presupuesto es requerido' });
+    }
+
+    // Agregar encabezados para desactivar la caché
+    res.set('Cache-Control', 'no-store'); // Evita que el navegador almacene en caché la respuesta
+
+
+    // Consulta para obtener los presupuestos del usuario
+    const query = `
+        SELECT * FROM presupuestos
+        WHERE IdPresupuesto = ?
+    `;
+    db.query(query, [idPresupuesto], (err, results) => {
+        if (err) {
+            console.error('Error al ejecutar la consulta:', err);
+            res.status(500).send('Error interno del servidor');
+            return;
+        }
+        console.log("Se consultaron los datos del presupuesto " + idPresupuesto, results);
+        res.json(results[0]); // Enviar los presupuestos al cliente
+    });
+});
+
 // Ruta protegida para obtener información del usuario
 app.get('/user-info', authenticateToken, (req, res) => {
     const userId = req.user.id; // ID del usuario autenticado
@@ -133,7 +162,7 @@ app.get('/grupos', authenticateToken, (req, res) => {
 // Ruta para manejar la creación de un nuevo presupuesto
 app.post('/presupuestos', authenticateToken, (req, res) => {
     const userId = req.user.id; // ID del usuario autenticado (extraído del token)
-    const { grupo, concepto, localizacion, fecha } = req.body; // Datos enviados desde el cliente
+    const { grupo, concepto, localizacion, fecha, hora, estado, precio, precio_iva, precio_final,idcontacto} = req.body; // Datos enviados desde el cliente
 
     // Validar que todos los campos estén presentes
     if (!grupo || !concepto || !localizacion ) {
@@ -142,10 +171,18 @@ app.post('/presupuestos', authenticateToken, (req, res) => {
     
     // Si no se proporciona una fecha, usar NULL
     const fechaFinal = fecha || null;
+    const horaFinal = hora || null;
+    const estadoFinal = estado || "Sin Responder"; // Estado por defecto
+    const precioFinal = precio || null; // Precio por defecto
+    const precio_ivaFinal = precio_iva || 21; // Precio IVA por defecto
+    const idcontactoFinal = idcontacto || null; // ID de contacto por defecto
+    const precio_finalFinal = precio_final || null; // Precio final por defecto
+
+
 
     // Consulta SQL para insertar un nuevo presupuesto
-    const query = 'INSERT INTO presupuestos (IdGrupo, Concepto, Localizacion, IdUsuario, Fecha) VALUES (?, ?, ?, ?, ?)';
-    const values = [grupo, concepto, localizacion, userId, fechaFinal];
+    const query = 'INSERT INTO presupuestos (IdGrupo, Concepto, Localizacion, Fecha, Hora, Estado, Precio, Precio_iva, Precio_final, Idcontacto, IdUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    const values = [grupo, concepto, localizacion, fechaFinal, horaFinal, estadoFinal, precioFinal, precio_ivaFinal, precio_finalFinal, idcontactoFinal, userId];
 
     db.query(query, values, (err, result) => {
         if (err) {
@@ -156,15 +193,68 @@ app.post('/presupuestos', authenticateToken, (req, res) => {
         console.log('Presupuesto añadido con éxito:', result);
 
         // Enviar la fila recién insertada al cliente
-        const newPresupuesto = {
-            IdGrupo: grupo,
-            Concepto: concepto,
-            Localizacion: localizacion,
-            IdUsuario: userId,
-            Fecha: fecha
-        };
+        res.status(201).json({ message: "Presupuesto añadido con éxito" });
+    });
+});
 
-        res.status(201).json(newPresupuesto); // Respuesta con el nuevo presupuesto
+//Ruta para manejar la modificación de datos de un presupuesto
+app.post('/presupuestos-mod', authenticateToken, (req, res) => {
+    const userId = req.user.id; // ID del usuario autenticado (extraído del token)
+    const { idpresupuesto, grupo, concepto, localizacion, fecha, hora, estado, precio, precio_iva, precio_final, idcontacto } = req.body; // Datos enviados desde el cliente
+
+    // Validar que el ID del presupuesto esté presente
+    if (!idpresupuesto) {
+        return res.status(400).send('El ID del presupuesto es obligatorio');
+    }
+
+    // Validar que los campos obligatorios estén presentes
+    if (!grupo || !concepto || !localizacion) {
+        return res.status(400).send('Todos los campos obligatorios deben estar presentes');
+    }
+
+    // Si no se proporciona una fecha, usar NULL
+    const fechaFinal = fecha || null;
+    const horaFinal = hora || null;
+    const estadoFinal = estado || "Sin Responder"; // Estado por defecto
+    const precioFinal = precio || null; // Precio por defecto
+    const precio_ivaFinal = precio_iva || 21; // Precio IVA por defecto
+    const idcontactoFinal = idcontacto || null; // ID de contacto por defecto
+    const precio_finalFinal = precio_final || null; // Precio final por defecto
+
+    // Consulta SQL para actualizar el presupuesto existente
+    const query = `
+        UPDATE presupuestos
+        SET IdGrupo = ?, Concepto = ?, Localizacion = ?, Fecha = ?, Hora = ?, Estado = ?, 
+            Precio = ?, Precio_iva = ?, Precio_final = ?, Idcontacto = ?, IdUsuario = ?
+        WHERE IdPresupuesto = ?
+    `;
+    const values = [
+        grupo,
+        concepto,
+        localizacion,
+        fechaFinal,
+        horaFinal,
+        estadoFinal,
+        precioFinal,
+        precio_ivaFinal,
+        precio_finalFinal,
+        idcontactoFinal,
+        userId,
+        idpresupuesto
+    ];
+
+    db.query(query, values, (err, result) => {
+        if (err) {
+            console.error('Error al actualizar el presupuesto:', err);
+            return res.status(500).send('Error interno del servidor');
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).send('Presupuesto no encontrado');
+        }
+
+        console.log('Presupuesto actualizado con éxito:', result);
+        res.status(200).json({ message: 'Presupuesto actualizado con éxito' });
     });
 });
 
