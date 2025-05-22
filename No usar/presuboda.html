@@ -2478,10 +2478,10 @@
                 m&uacute;sicos </span><span class="c1">(bater&iacute;a, bajo, teclado, guitarra y voz) </span><span>y
             </span><span class="c40">un t&eacute;cnico de sonido</span><span class="c1">. Programada para el d&iacute;a
             </span><span class="c14">##fechaactuacion</span><span class="c1">&nbsp;en </span><span class="c14">##espacio
-            </span><span class="c1">con motivo de la celebraci&oacute;n de la </span><span
-                class="c14">##nombres</span><span class="c0">. </span></li>
-        <li class="c5 li-bullet-0"><span class="c0">La actuaci&oacute;n est&aacute; programada para las ##horas
-                horas.</span></li>
+            </span><span class="c1">(##localidad) </span><span class="c1">con motivo de la celebraci&oacute;n de la
+            </span><span class="c14">##nombres</span><span class="c0">. </span></li>
+        <li class="c5 li-bullet-0"><span class="c0">La actuaci&oacute;n est&aacute; programada para el ##tipoevento,
+                aproximadamente a las ##horas horas.</span></li>
         <li class="c5 li-bullet-0"><span class="c0">La duraci&oacute;n de la actuaci&oacute;n es de 1 hora y media,
                 siendo posible, si as&iacute; se desea, dividir el espect&aacute;culo en dos pases de 45 minutos con un
                 descanso entre medias. </span></li>
@@ -2665,15 +2665,15 @@
                 <p class="c29"><span class="c0">Total SIN IVA</span></p>
             </td>
             <td class="c20" colspan="1" rowspan="1">
-                <p class="c46 c52"><span class="c0">##siniva€</span></p>
+                <p class="c46 c52"><span class="c0">##siniva</span></p>
             </td>
         </tr>
         <tr class="c3">
             <td class="c26" colspan="1" rowspan="1">
-                <p class="c29"><span class="c0">IVA: ##porc%</span></p>
+                <p class="c29"><span class="c0">IVA: ##porc</span></p>
             </td>
             <td class="c20" colspan="1" rowspan="1">
-                <p class="c52 c46"><span class="c0">##iva€</span></p>
+                <p class="c52 c46"><span class="c0">##iva</span></p>
             </td>
         </tr>
         <tr class="c3">
@@ -2681,7 +2681,7 @@
                 <p class="c29"><span class="c0">TOTAL A ABONAR</span></p>
             </td>
             <td class="c20" colspan="1" rowspan="1">
-                <p class="c52 c46"><span class="c0">##final€</span></p>
+                <p class="c52 c46"><span class="c0">##final</span></p>
             </td>
         </tr>
     </table>
@@ -2695,8 +2695,10 @@
         <p class="c28"><span class="c18"></span></p>
     </div>
     <!-- Botón flotante para imprimir -->
-    <div class="floating-btn" id="download-btn">⬇</div>
-    <script src="scriptpresu.js"></script>
+    <div class="floating-btn" id="download-btn" onclick="pdfPage()">⬇</div>
+
+
 </body>
+<script src="scriptpresu.js"></script>
 
 </html>

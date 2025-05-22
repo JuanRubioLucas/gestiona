@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,10 @@
     <link rel="stylesheet" href="style_input.css"> <!-- Enlace al archivo CSS -->
 
 </head>
+
 <body>
     <!-- tabla principal de presupuestos-->
-    <h1>Presupuestos</h1>  
+    <h1>Presupuestos</h1>
     <table id="presupuestos-table">
         <thead>
             <tr>
@@ -30,8 +32,8 @@
 
     <!-- Botón flotante de configuración -->
     <button id="settings-btn" class="floating-btn hidden">⋮</button>
-    
-   <!-- Modal reutilizable para añadir, consultar o editar presupuesto -->
+
+    <!-- Modal reutilizable para añadir, consultar o editar presupuesto -->
     <div id="budget-modal" class="modal hidden">
         <div class="modal-content">
             <h2 id="modal-title">Añadir Presupuesto</h2> <!-- Título dinámico -->
@@ -70,7 +72,7 @@
                     </div>
                     <div class="form-group">
                         <label for="precio-final">Precio Final: (€)</label>
-                        <input type="number" id="precio-final" name="precio-final" step="0.01" >
+                        <input type="number" id="precio-final" name="precio-final" step="0.01">
                     </div>
                 </div>
                 <label for="idcontacto">ID Contacto:</label>
@@ -79,7 +81,8 @@
                 <input type="text" id="idusuario" name="idusuario" readonly>
                 <button type="submit" id="modal-action-btn">Añadir</button> <!-- Botón dinámico -->
                 <button type="button" id="close-modal-btn">Cancelar</button>
-                <button type="button" id="delete-budget-btn">Eliminar</button> <!-- Botón de eliminar -->
+                <button type="button" id="generate-budget-btn">Generar</button>
+                <!-- Boton dinamico generar presupuesto -->
             </form>
         </div>
     </div>
@@ -87,7 +90,7 @@
     <script>
         //Cosas de login
         // Obtener el token del almacenamiento local
-        const token = localStorage.getItem('token'); 
+        const token = localStorage.getItem('token');
         if (!token) {
             alert('No estás autenticado');
             window.location.href = '/index.html'; // Redirigir al login si no hay token
@@ -99,38 +102,39 @@
                     'Authorization': `Bearer ${token}`
                 }
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('No autorizado');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Mostrar el botón de configuración si el usuario es administrador
-                if (data.role === 'administrador') {
-                    const settingsBtn = document.getElementById('settings-btn');
-                    settingsBtn.classList.remove('hidden');
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('No autorizado');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Mostrar el botón de configuración si el usuario es administrador
+                    if (data.role === 'administrador') {
+                        const settingsBtn = document.getElementById('settings-btn');
+                        settingsBtn.classList.remove('hidden');
 
-                    // Redirigir a la página de configuración al hacer clic en el botón
-                    settingsBtn.addEventListener('click', () => {
-                        window.location.href = '/configuracion.html'; // Página de configuración
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error al obtener la información del usuario:', error);
-            });
+                        // Redirigir a la página de configuración al hacer clic en el botón
+                        settingsBtn.addEventListener('click', () => {
+                            window.location.href = '/configuracion.html'; // Página de configuración
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al obtener la información del usuario:', error);
+                });
         }
 
 
-        
+
         // Obtener los presupuestos del servidor (en archivo externo consultapresu.js
 
-        
 
-        
+
+
 
     </script>
-    <script src="presupuestosdb.js"></script>    
+    <script src="presupuestosdb.js"></script>
 </body>
+
 </html>

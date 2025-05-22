@@ -8,53 +8,53 @@ function actualizarTablaPresupuestos() {
         method: 'GET',
         headers: { 'Authorization': `Bearer ${token}` }
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('No autorizado');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Presupuestos:', data);
-        data.forEach(presupuesto => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('No autorizado');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Presupuestos:', data);
+            data.forEach(presupuesto => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
                 <td>${presupuesto.Nombre}</td>
                 <td>${presupuesto.Concepto}</td>
                 <td>${presupuesto.Localizacion}</td>
                 <td>${new Date(presupuesto.Fecha).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit' }).replace(/\//g, '-')}</td>
             `;
-            tableBody.appendChild(row);
-            // Agregar evento click a la fila
-            row.addEventListener('click', () => {
-                // Redirigir a la página de detalles con el ID del presupuesto
-                // window.location.href = `/detallesPresupuesto.html?id=${presupuesto.IdPresupuesto}`;
-                openModal('show', presupuesto.IdPresupuesto);
-            });
+                tableBody.appendChild(row);
+                // Agregar evento click a la fila
+                row.addEventListener('click', () => {
+                    // Redirigir a la página de detalles con el ID del presupuesto
+                    // window.location.href = `/detallesPresupuesto.html?id=${presupuesto.IdPresupuesto}`;
+                    openModal('show', presupuesto.IdPresupuesto);
+                });
 
-            // Cambiar el cursor al pasar sobre la fila
-            row.style.cursor = 'pointer';
+                // Cambiar el cursor al pasar sobre la fila
+                row.style.cursor = 'pointer';
+            });
+        })
+        .catch(error => {
+            console.error('Error al obtener los presupuestos:', error);
+            alert('No autorizado');
+            window.location.href = '/index.html';
         });
-    })
-    .catch(error => {
-        console.error('Error al obtener los presupuestos:', error);
-        alert('No autorizado');
-        window.location.href = '/index.html';
-    });
 }
 actualizarTablaPresupuestos();
 
 //AÑADIR PRESUPUESTO
 //Obtener los grupos desde la base de datos y llenar el desplegable
-    fetch('/grupos', {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    })
+fetch('/grupos', {
+    method: 'GET',
+    headers: {
+        'Authorization': `Bearer ${token}`
+    }
+})
     .then(response => {
         if (!response.ok) {
-                    throw new Error('Error al obtener los grupos');
+            throw new Error('Error al obtener los grupos');
         }
         return response.json();
     })
@@ -68,7 +68,7 @@ actualizarTablaPresupuestos();
         });
     })
     .catch(error => {
-                console.error('Error al obtener los grupos:', error);
+        console.error('Error al obtener los grupos:', error);
     });
 
 //CONSULTAR PRESUPUESTO
@@ -81,15 +81,15 @@ function obtenerPresupuesto(idPresupuesto) {
             'idPresupuesto': idPresupuesto
         }
     })
-    .then(response => {
-        if (!response.ok) {
-                    throw new Error('Error al obtener el presupuesto '+idPresupuesto+' del servidor');
-        }
-        return response.json();
-    })
-    .catch(error => {
-                console.error('Error al obtener los grupos:', error);
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al obtener el presupuesto ' + idPresupuesto + ' del servidor');
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error al obtener los grupos:', error);
+        });
 }
 //AÑADIR PRESUPUESTO
 function addBudget() {
@@ -114,30 +114,30 @@ function addBudget() {
         },
         body: JSON.stringify({ grupo, concepto, localizacion, fecha })
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error al añadir el presupuesto');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log(data.message);
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al añadir el presupuesto');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data.message);
 
-        // Actualizar la tabla de presupuestos después de añadir un nuevo presupuesto
-        actualizarTablaPresupuestos();
+            // Actualizar la tabla de presupuestos después de añadir un nuevo presupuesto
+            actualizarTablaPresupuestos();
 
-        // Cerrar el modal y limpiar el formulario
-        modal.classList.remove('show');
-        budgetForm.reset();
-    })
-    .catch(error => {
-        console.error('Error al añadir el presupuesto:', error);
-        alert('Error al añadir el presupuesto');
-    });
+            // Cerrar el modal y limpiar el formulario
+            modal.classList.remove('show');
+            budgetForm.reset();
+        })
+        .catch(error => {
+            console.error('Error al añadir el presupuesto:', error);
+            alert('Error al añadir el presupuesto');
+        });
 };
 //MODIFICAR PRESUPUESTO
 function modBudget() {
-    const idpresupuesto = document.getElementById('idpresupuesto').value;   
+    const idpresupuesto = document.getElementById('idpresupuesto').value;
     console.log('Modificando presupuesto con ID:', idpresupuesto);
     const grupo = document.getElementById('grupo').value;
     const concepto = document.getElementById('concepto').value;
@@ -171,26 +171,26 @@ function modBudget() {
             idusuario
         })
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error al modificar el presupuesto');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log(data.message);
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al modificar el presupuesto');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data.message);
 
-        // Actualizar la tabla de presupuestos después de añadir un nuevo presupuesto
-        actualizarTablaPresupuestos();
+            // Actualizar la tabla de presupuestos después de añadir un nuevo presupuesto
+            actualizarTablaPresupuestos();
 
-        // Cerrar el modal y limpiar el formulario
-        modal.classList.remove('show');
-        budgetForm.reset();
-    })
-    .catch(error => {
-        console.error('Error al modificar el presupuesto:', error);
-        alert('Error al modificar el presupuesto');
-    });
+            // Cerrar el modal y limpiar el formulario
+            modal.classList.remove('show');
+            budgetForm.reset();
+        })
+        .catch(error => {
+            console.error('Error al modificar el presupuesto:', error);
+            alert('Error al modificar el presupuesto');
+        });
 };
 
 // Mostrar el modal al hacer clic en el botón flotante
@@ -198,6 +198,7 @@ const addBudgetBtn = document.getElementById('add-budget-btn');
 const modal = document.getElementById('budget-modal');
 const modalTitle = document.getElementById('modal-title');
 const modalActionBtn = document.getElementById('modal-action-btn');
+const generarPresupuestoBtn = document.getElementById('generate-budget-btn');
 const budgetForm = document.getElementById('budget-form');
 const closeModalBtn = document.getElementById('close-modal-btn');
 const deleteBudgetBtn = document.getElementById('delete-budget-btn');
@@ -235,7 +236,7 @@ async function openModal(action, idPresupuesto) {
             document.getElementById('estado').value = budgetData.Estado;
             document.getElementById('precio').value = parseFloat(budgetData.Precio).toFixed(2);
             document.getElementById('precio-iva').value = parseInt(budgetData.Precio_iva);
-            document.getElementById('precio-final').value = (parseFloat(budgetData.Precio)*(1+parseInt(budgetData.Precio_iva)/100)).toFixed(2);
+            document.getElementById('precio-final').value = (parseFloat(budgetData.Precio) * (1 + parseInt(budgetData.Precio_iva) / 100)).toFixed(2);
             document.getElementById('idcontacto').value = budgetData.Idcontacto;
             document.getElementById('idusuario').value = budgetData.IdUsuario;
         } catch (error) {
@@ -252,21 +253,28 @@ closeModalBtn.addEventListener('click', () => {
     modal.classList.remove('show');
 });
 
+//funcion para generar el persupuesto
+generarPresupuestoBtn.addEventListener('click', () => {
+    modBudget(); // Llamar a la función para modificar presupuesto 
+    const idpresupuesto = document.getElementById('idpresupuesto').value;
+    console.log('Generando presupuesto con ID:', idpresupuesto);
+    window.location.href = `plantillas/presuboda.html?id=${idpresupuesto}`;
+});
 // Evento para manejar el envío del formulario
 budgetForm.addEventListener('submit', (event) => {
     event.preventDefault();
     if (modalActionBtn.textContent === 'Añadir') {
-        addBudget(); // Llamar a la función para añadir presupuesto (debería de servir también para editar el presupuesto)
+        addBudget(); // Llamar a la función para añadir presupuesto 
         console.log('Añadiendo presupuesto...');
     } else if (modalActionBtn.textContent === 'Guardar Cambios') {
-        modBudget(); // Llamar a la función para añadir presupuesto (debería de servir también para editar el presupuesto)
+        modBudget(); // Llamar a la función para modificar presupuesto
         console.log('Guardando cambios en el presupuesto...');
     }
 });
 
 // Abrir el modal para añadir un nuevo presupuesto
 addBudgetBtn.addEventListener('click', () => {
-    openModal('add'); 
+    openModal('add');
 });
 
 //Boton cerrar modal
@@ -292,10 +300,10 @@ ivaInput.addEventListener('keyup', calcularPrecioFinal);
 
 
 //ATAJOS DE TECLADO
- // Abrir el formulario al pulsar Shift + N
+// Abrir el formulario al pulsar Shift + N
 document.addEventListener('keydown', (event) => {
     if (event.shiftKey && event.key === 'N') {
         modal.classList.remove('hidden');
-        modal.classList.add('show');    
+        modal.classList.add('show');
     }
 });

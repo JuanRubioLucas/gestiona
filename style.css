@@ -3,17 +3,22 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('imagenes/photo_2023-11-15 02.23.29.jpg'); /* Ruta a la imagen */
-    background-size: cover; /* Escala la imagen para cubrir toda la pantalla */
-    background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat; /*Evita que la imagen se repita */
+    background-image: url('imagenes/photo_2023-11-15 02.23.29.jpg');
+    /* Ruta a la imagen */
+    background-size: cover;
+    /* Escala la imagen para cubrir toda la pantalla */
+    background-position: center;
+    /* Centra la imagen */
+    background-repeat: no-repeat;
+    /*Evita que la imagen se repita */
     color: #333;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-  }
+}
+
 /* Login Container */
 .login-container {
     background: #fff;
@@ -30,20 +35,27 @@ body {
 
 .login-container input,
 .login-container button {
-    width: 100%; /* Asegura que todos tengan el mismo ancho */
-    padding: 10px; /* Espaciado interno consistente */
-    font-size: 16px; /* Tamaño de fuente consistente */
-    border: 1px solid #ccc; /* Borde consistente */
-    border-radius: 4px; /* Bordes redondeados */
-    box-sizing: border-box; /* Incluye el relleno y el borde en el tamaño total */
+    width: 100%;
+    /* Asegura que todos tengan el mismo ancho */
+    padding: 10px;
+    /* Espaciado interno consistente */
+    font-size: 16px;
+    /* Tamaño de fuente consistente */
+    border: 1px solid #ccc;
+    /* Borde consistente */
+    border-radius: 4px;
+    /* Bordes redondeados */
+    box-sizing: border-box;
+    /* Incluye el relleno y el borde en el tamaño total */
 }
 
 .login-container input {
-    margin: 10px 0; /* Espaciado vertical entre los cuadros */
+    margin: 10px 0;
+    /* Espaciado vertical entre los cuadros */
 }
 
 .login-container button {
-    background-color: #007BFF;
+    background-color: #424c55;
     color: white;
     border: none;
     cursor: pointer;
@@ -51,20 +63,26 @@ body {
 }
 
 .login-container button:hover {
-    background-color: #0056b3;
+    background-color: #0057b3ad;
 }
 
 /* Título */
 h1 {
     margin-bottom: 20px;
-    color: #007BFF;
+    color: #ffffff;
     /* formato de fondo para que se lean las letras */
-    background-color: rgba(0, 0, 0, 0.4); /* Fondo blanco semitransparente */
-    padding: 10px 20px; /* Espaciado interno para separar el texto del fondo */
-    border-radius: 8px; /* Bordes redondeados */
-    display: inline-block; /* Ajusta el fondo al tamaño del texto */
-    text-align: center; /* Centra el texto */
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.5); /* Borde difuminado */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Fondo blanco semitransparente */
+    padding: 10px 20px;
+    /* Espaciado interno para separar el texto del fondo */
+    border-radius: 8px;
+    /* Bordes redondeados */
+    display: inline-block;
+    /* Ajusta el fondo al tamaño del texto */
+    text-align: center;
+    /* Centra el texto */
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.59);
+    /* Borde difuminado */
 
 }
 
@@ -73,22 +91,26 @@ table {
     width: 90%;
     border-collapse: collapse;
     margin: 0 auto;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #000000;
+    box-shadow: 0 4px 6px rgb(255, 255, 255);
     border-radius: 8px;
     overflow: hidden;
 }
 
 table td {
-    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-    overflow: hidden; /* Oculta el texto que se desborda */
-    text-overflow: ellipsis; /* Muestra "..." cuando el texto es demasiado largo */
-    max-width: 80px; /* Establece un ancho máximo para las celdas */
+    white-space: nowrap;
+    /* Evita que el texto se divida en varias líneas */
+    overflow: hidden;
+    /* Oculta el texto que se desborda */
+    text-overflow: ellipsis;
+    /* Muestra "..." cuando el texto es demasiado largo */
+    max-width: 80px;
+    /* Establece un ancho máximo para las celdas */
 }
 
 /* Encabezado de la tabla */
 thead {
-    background-color: #007BFF;
+    background-color: rgba(0, 0, 0, 0.8);
     color: #fff;
 }
 
@@ -100,18 +122,18 @@ thead th {
 
 /* Filas de la tabla */
 tbody tr:nth-child(odd) {
-    background-color: #f9f9f9;
+    background-color: #000000;
 }
 
 tbody tr:nth-child(even) {
-    background-color: #e9ecef;
+    background-color: #ffffff;
 }
 
 tbody td {
     padding: 15px;
     text-align: left;
     font-size: 14px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #000000;
 }
 
 /* Última fila sin borde */
@@ -130,7 +152,8 @@ tbody tr:hover {
         width: 100%;
     }
 
-    thead th, tbody td {
+    thead th,
+    tbody td {
         font-size: 14px;
         padding: 10px;
     }
@@ -139,11 +162,13 @@ tbody tr:hover {
 /* Botón flotante de configuración */
 #settings-btn {
     position: fixed;
-    bottom: 90px; /* Ajusta la posición para que no se superponga con el botón de añadir */
+    bottom: 90px;
+    /* Ajusta la posición para que no se superponga con el botón de añadir */
     right: 20px;
     width: 60px;
     height: 60px;
-    background-color: #007BFF; /* Color azul como el botón de añadir */
+    background-color: #007BFF;
+    /* Color azul como el botón de añadir */
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -155,7 +180,8 @@ tbody tr:hover {
 }
 
 #settings-btn:hover {
-    background-color: #0056b3; /* Azul más oscuro al pasar el cursor */
+    background-color: #424c55;
+    /* Azul más oscuro al pasar el cursor */
 }
 
 /* Estilo para los puntos */
@@ -164,12 +190,14 @@ tbody tr:hover {
     height: 4px;
     background-color: white;
     border-radius: 50%;
-    margin: 3px 0; /* Espaciado entre los puntos */
+    margin: 3px 0;
+    /* Espaciado entre los puntos */
 }
 
 .settings-btn {
     display: flex;
-    flex-direction: column; /* Alinea los puntos verticalmente */
+    flex-direction: column;
+    /* Alinea los puntos verticalmente */
     align-items: center;
     justify-content: center;
 }
@@ -189,7 +217,7 @@ table {
 }
 
 thead {
-    background-color: #007BFF;
+    background-color: #000000c9;
     color: #fff;
 }
 
@@ -221,11 +249,13 @@ tbody tr:last-child td {
 tbody tr:hover {
     background-color: #d6e9f9;
 }
+
 /* Botones dentro de las tablas */
 .table-btn {
     width: 100%;
     padding: 10px;
-    background-color: #60a2e8; /* Azul */
+    background-color: #50504f;
+    /* Azul */
     color: white;
     border: none;
     border-radius: 4px;
@@ -235,12 +265,14 @@ tbody tr:hover {
 }
 
 .table-btn:hover {
-    background-color: #60a2e8; /* Azul más oscuro */
+    background-color: #60a2e8;
+    /* Azul más oscuro */
 }
 
 /* Cambiar el cursor y el fondo al pasar sobre las filas */
 #presupuestos-table tbody tr:hover {
-    background-color: #f0f8ff; /* Azul claro */
+    background-color: #f0f8ff;
+    /* Azul claro */
     cursor: pointer;
 }
 
@@ -249,7 +281,8 @@ tbody tr:hover {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #007bff; /* Azul */
+    background-color: #007bff;
+    /* Azul */
     color: white;
     border: none;
     border-radius: 50%;
@@ -267,29 +300,37 @@ tbody tr:hover {
 .hidden {
     display: none;
 }
+
 /* Botón Editar */
 .edit-btn {
     display: block;
-    margin: 20px auto; /* Centrar el botón debajo de la tabla */
+    margin: 20px auto;
+    /* Centrar el botón debajo de la tabla */
     padding: 10px 20px;
-    background-color: #007bff; /* Azul */
+    background-color: #007bff;
+    /* Azul */
     color: white;
     border: none;
-    border-radius: 4px; /* Botón cuadrado con bordes ligeramente redondeados */
+    border-radius: 4px;
+    /* Botón cuadrado con bordes ligeramente redondeados */
     font-size: 16px;
     cursor: pointer;
     text-align: center;
-    width: 150px; /* Ancho fijo */
+    width: 150px;
+    /* Ancho fijo */
 }
 
 .edit-btn:hover {
-    background-color: #0056b3; /* Azul más oscuro al pasar el cursor */
+    background-color: #0056b3;
+    /* Azul más oscuro al pasar el cursor */
 }
+
 .generate-btn {
     display: block;
     margin: 20px auto;
     padding: 10px 20px;
-    background-color: #882121; /* Verde */
+    background-color: #882121;
+    /* Verde */
     color: white;
     border: none;
     border-radius: 4px;
@@ -300,51 +341,73 @@ tbody tr:hover {
 }
 
 .generate-btn:hover {
-    background-color: #671a1a; 
+    background-color: #671a1a;
 }
 
 /* Estilo para el select */
 select {
-    width: 100%; /* Ocupa todo el ancho disponible */
-    padding: 10px; /* Espaciado interno */
-    font-size: 16px; /* Tamaño de fuente más grande */
-    font-family: Arial, sans-serif; /* Fuente consistente */
-    border: 1px solid #ccc; /* Borde gris claro */
-    border-radius: 4px; /* Bordes redondeados */
-    background-color: #fff; /* Fondo blanco */
-    color: #333; /* Color del texto */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-    appearance: none; /* Elimina el estilo por defecto del navegador */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el select */
+    width: 100%;
+    /* Ocupa todo el ancho disponible */
+    padding: 10px;
+    /* Espaciado interno */
+    font-size: 16px;
+    /* Tamaño de fuente más grande */
+    font-family: Arial, sans-serif;
+    /* Fuente consistente */
+    border: 1px solid #ccc;
+    /* Borde gris claro */
+    border-radius: 4px;
+    /* Bordes redondeados */
+    background-color: #fff;
+    /* Fondo blanco */
+    color: #333;
+    /* Color del texto */
+    box-shadow: 0 2px 4px rgb(255, 255, 255);
+    /* Sombra ligera */
+    appearance: none;
+    /* Elimina el estilo por defecto del navegador */
+    cursor: pointer;
+    /* Cambia el cursor al pasar sobre el select */
 }
 
 /* Estilo para el select al pasar el cursor */
 select:hover {
-    border-color: #007bff; /* Cambia el borde a azul */
+    border-color: #007bff;
+    /* Cambia el borde a azul */
 }
 
 /* Estilo para el select al enfocarse */
 select:focus {
-    outline: none; /* Elimina el contorno por defecto */
-    border-color: #007bff; /* Borde azul */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra azul */
+    outline: none;
+    /* Elimina el contorno por defecto */
+    border-color: #007bff;
+    /* Borde azul */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    /* Sombra azul */
 }
 
 
 .delete-btn {
     display: block;
-    margin: 20px auto; /* Centrar el botón debajo de la tabla */
-    padding: 10px 20px; /* Espaciado interno consistente */
-    background-color: #dc3545; /* Rojo */
+    margin: 20px auto;
+    /* Centrar el botón debajo de la tabla */
+    padding: 10px 20px;
+    /* Espaciado interno consistente */
+    background-color: #dc3545;
+    /* Rojo */
     color: white;
     border: none;
-    border-radius: 4px; /* Bordes redondeados */
-    font-size: 16px; /* Tamaño de fuente consistente */
+    border-radius: 4px;
+    /* Bordes redondeados */
+    font-size: 16px;
+    /* Tamaño de fuente consistente */
     cursor: pointer;
     text-align: center;
-    width: 200px; /* Ancho fijo consistente con los otros botones */
+    width: 200px;
+    /* Ancho fijo consistente con los otros botones */
 }
 
 .delete-btn:hover {
-    background-color: #c82333; /* Rojo más oscuro */
+    background-color: #c82333;
+    /* Rojo más oscuro */
 }
