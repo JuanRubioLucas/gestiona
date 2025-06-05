@@ -411,3 +411,7 @@ select:focus {
     background-color: #c82333;
     /* Rojo más oscuro */
 }
+
+.no-scroll {
+    overflow: hidden;
+}

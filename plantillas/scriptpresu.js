@@ -67,14 +67,10 @@ async function rellenarDatos() {
         "Localizacion": "##espacio",
         "Precio_iva": "##porc"
     };
-
     const hoy = new Date();
     const dia = String(hoy.getDate()).padStart(2, '0'); // Asegura que el día tenga 2 dígitos
     const mes = String(hoy.getMonth() + 1).padStart(2, '0'); // Los meses van de 0 a 11, por eso sumamos 1
     const anio = hoy.getFullYear();
-
-
-
 
     // Iterar sobre las claves del diccionario
     const body = document.body;

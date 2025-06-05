@@ -5,6 +5,23 @@ const app = express();
 const port = 3000;
 const jwt = require('jsonwebtoken');
 const secretKey = 'asdfSDF6G12SDF65GS65DF1G65S0FD,G21S366Sd16sxdf51g3sdf4g6s13243262938864,50e5y35,60345-------gbs535767asdf'; // Cambia esto por una clave secreta más segura
+const os = require('os');
+
+// Obtener la dirección IP local
+function getLocalIPAddress() {
+    const interfaces = os.networkInterfaces();
+    for (const interfaceName in interfaces) {
+        for (const iface of interfaces[interfaceName]) {
+            if (iface.family === 'IPv4' && !iface.internal) {
+                return iface.address;
+            }
+        }
+    }
+    return 'localhost'; // Si no se encuentra una IP, usar localhost como fallback
+}
+
+const localIP = getLocalIPAddress();
+
 
 // Configurar el middleware para servir archivos estáticos
 app.use(express.static('/Users/lucas/Desktop/Gestiona')); // Cambia 'public' por el directorio donde están tus archivos estáticos
@@ -20,6 +37,26 @@ function authenticateToken(req, res, next) {
         if (err) return res.sendStatus(403).send('Token inválido o expirado'); // Si el token no es válido, devolver 403
         req.user = user; // Guardar la información del usuario en la solicitud
         next(); // Pasar al siguiente middleware o ruta
+    });
+}
+
+
+// Función para verificar si el usuario es administrador
+function isAdmin(userId, callback) {
+    const query = 'SELECT Rol FROM Usuarios WHERE IdUsuario = ?';
+    db.query(query, [userId], (err, results) => {
+        if (err) {
+            console.error('Error al verificar el rol del usuario:', err);
+            return callback(err, null);
+        }
+
+        if (results.length === 0) {
+            return callback(null, false); // Usuario no encontrado
+        }
+
+        const role = results[0].Rol;
+        console.log('Rol del usuario:', role); // Depuración
+        callback(null, role === 'administrador'); // Devuelve true si el rol es 'admin'
     });
 }
 
@@ -75,22 +112,38 @@ app.get('/presupuestos', authenticateToken, (req, res) => {
     // Agregar encabezados para desactivar la caché
     res.set('Cache-Control', 'no-store'); // Evita que el navegador almacene en caché la respuesta
 
-
-    // Consulta para obtener los presupuestos del usuario
-    const query = `
-        SELECT p.IdPresupuesto, g.Nombre, p.Concepto, p.Localizacion, p.Fecha
-        FROM presupuestos p
-        JOIN Grupos g ON p.IdGrupo = g.IdGrupo
-        WHERE p.IdUsuario = ?
-    `;
-    db.query(query, [userId], (err, results) => {
+    isAdmin(userId, (err, isAdminResult) => {
         if (err) {
-            console.error('Error al ejecutar la consulta:', err);
-            res.status(500).send('Error interno del servidor');
-            return;
+            console.error('Error al verificar si el usuario es administrador:', err);
+            return res.status(500).send('Error interno del servidor');
         }
-        console.log("Se consultó la base de datos (presupuestos), para el usuario: " + userId);
-        res.json(results); // Enviar los presupuestos al cliente
+
+        let query;
+        if (isAdminResult) {
+            console.log("El usuario es administrador, se le muestran todos los presupuestos");
+            query = `
+                SELECT p.IdPresupuesto, g.Nombre, p.Concepto, p.Localizacion, p.Fecha
+                FROM presupuestos p
+                JOIN Grupos g ON p.IdGrupo = g.IdGrupo
+            `;
+        } else {
+            console.log("El usuario no es administrador, se le muestran solo sus presupuestos");
+            query = `
+                SELECT p.IdPresupuesto, g.Nombre, p.Concepto, p.Localizacion, p.Fecha
+                FROM presupuestos p
+                JOIN Grupos g ON p.IdGrupo = g.IdGrupo
+                WHERE p.IdUsuario = ?
+            `;
+        }
+
+        db.query(query, isAdminResult ? [] : [userId], (err, results) => {
+            if (err) {
+                console.error('Error al ejecutar la consulta:', err);
+                return res.status(500).send('Error interno del servidor');
+            }
+            console.log("Se consultó la base de datos (presupuestos), para el usuario: " + userId);
+            res.json(results); // Enviar los presupuestos al cliente
+        });
     });
 });
 
@@ -162,13 +215,13 @@ app.get('/grupos', authenticateToken, (req, res) => {
 // Ruta para manejar la creación de un nuevo presupuesto
 app.post('/presupuestos', authenticateToken, (req, res) => {
     const userId = req.user.id; // ID del usuario autenticado (extraído del token)
-    const { grupo, concepto, localizacion, fecha, hora, estado, precio, precio_iva, precio_final,idcontacto} = req.body; // Datos enviados desde el cliente
+    const { grupo, concepto, localizacion, fecha, hora, estado, precio, precio_iva, idcontacto, id_usuario } = req.body; // Datos enviados desde el cliente
 
     // Validar que todos los campos estén presentes
-    if (!grupo || !concepto || !localizacion ) {
-        return res.status(400).send('Todos los campos son obligatorios');
+    if (!grupo || !concepto || !localizacion) {
+        return res.status(400).send('Faltan datos obligatorios (grupo, concepto, localización)');
     }
-    
+
     // Si no se proporciona una fecha, usar NULL
     const fechaFinal = fecha || null;
     const horaFinal = hora || null;
@@ -176,13 +229,11 @@ app.post('/presupuestos', authenticateToken, (req, res) => {
     const precioFinal = precio || null; // Precio por defecto
     const precio_ivaFinal = precio_iva || 21; // Precio IVA por defecto
     const idcontactoFinal = idcontacto || null; // ID de contacto por defecto
-    const precio_finalFinal = precio_final || null; // Precio final por defecto
-
 
 
     // Consulta SQL para insertar un nuevo presupuesto
     const query = 'INSERT INTO presupuestos (IdGrupo, Concepto, Localizacion, Fecha, Hora, Estado, Precio, Precio_iva, Precio_final, Idcontacto, IdUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    const values = [grupo, concepto, localizacion, fechaFinal, horaFinal, estadoFinal, precioFinal, precio_ivaFinal, precio_finalFinal, idcontactoFinal, userId];
+    const values = [grupo, concepto, localizacion, fechaFinal, horaFinal, estadoFinal, precioFinal, precio_ivaFinal, null, idcontactoFinal, userId];
 
     db.query(query, values, (err, result) => {
         if (err) {
@@ -316,6 +367,7 @@ app.post('/usuarios', authenticateToken, (req, res) => {
 // Iniciar el servidor
 app.listen(port, () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
+    console.log(`Accede a la aplicación en http://${localIP}:${port}`); // Mostrar la IP local
 });
 
 app.get('/presupuestos/:id', authenticateToken, (req, res) => {

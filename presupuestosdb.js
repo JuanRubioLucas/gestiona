@@ -112,7 +112,7 @@ function addBudget() {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({ grupo, concepto, localizacion, fecha })
+        body: JSON.stringify({ grupo, concepto, localizacion, fecha, hora, estado, precio, precio_iva, idcontacto, idusuario })
     })
         .then(response => {
             if (!response.ok) {
@@ -129,6 +129,7 @@ function addBudget() {
             // Cerrar el modal y limpiar el formulario
             modal.classList.remove('show');
             budgetForm.reset();
+            document.body.classList.remove('no-scroll'); // Eliminar la clase no scroll del body cuando se cierra el modal
         })
         .catch(error => {
             console.error('Error al añadir el presupuesto:', error);
@@ -185,6 +186,7 @@ function modBudget() {
 
             // Cerrar el modal y limpiar el formulario
             modal.classList.remove('show');
+            document.body.classList.remove('no-scroll'); // Eliminar la clase no scroll del body cuando se cierra el modal
             budgetForm.reset();
         })
         .catch(error => {
@@ -305,5 +307,6 @@ document.addEventListener('keydown', (event) => {
     if (event.shiftKey && event.key === 'N') {
         modal.classList.remove('hidden');
         modal.classList.add('show');
+        document.body.classList.add('no-scroll'); // Añadir clase para evitar scroll
     }
 });
